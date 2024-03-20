@@ -1,0 +1,6 @@
+  _id: number;
+  created: Date;
+  complete: boolean
+  deadline: Date;
+  title: string;
+  text: string;
