@@ -14,7 +14,7 @@
         <!-- <header class="header"></header> -->
         <main class="main">
             <aside class="aside">
-                <button class="aside__user">
+                <button data-popup-link="2" class="aside__user">
                     <svg style="width: 24px; height: 24px;">
                         <use xlink:href="./images/user.svg#user"></use>
                     </svg>
@@ -224,11 +224,93 @@
             </div>
         </div>
     </div>
-    <div class="popup-auth"></div>
-    <div class="popup-register"></div>
+    <div data-popup="2" class="popup-auth">
+        <div data-shadow class="popup-shadow"></div>
+        <div class="popup-auth__modal">
+            <button data-close class="popup-auth__close">&#x2716;</button>
+
+            <h3 class="popup-auth__title">Login</h3>
+
+            <form class="popup-auth__form" action="#">
+                <label class="popup-auth__label input">
+                    <input class="popup-auth__input" placeholder="Login"/>
+                </label>
+                <label class="popup-auth__label input">
+                    <div data-eye class="popup-auth__eye">
+                        <button data-eye-open class="popup-auth__eye-open active">
+                            <svg style="width: 24px; height: 24px;">
+                                <use xlink:href="./images/eye.svg#eye"></use>
+                            </svg>
+                        </button>
+                        <button data-eye-close class="popup-auth__eye-close">
+                            <svg style="width: 24px; height: 24px;">
+                                <use xlink:href="./images/eye-close.svg#eye-close"></use>
+                            </svg>
+                        </button>
+                    </div>
+                    <input data-input-pass class="popup-auth__input" type="password" placeholder="Password"/>
+                </label>
+                <button class="popup-auth__submit send">Submit</button>
+            </form>
+
+            <button data-popup-link="3" class="popup-auth__bottom-btn">Зареєструватися</button>
+        </div>
+    </div>
+    <div data-popup="3" class="popup-auth register">
+        <div data-shadow class="popup-shadow"></div>
+        <div class="popup-auth__modal">
+            <button data-close class="popup-auth__close">&#x2716;</button>
+
+            <h3 class="popup-auth__title">Registration</h3>
+
+            <form class="popup-auth__form">
+                <label class="popup-auth__label input">
+                    <input class="popup-auth__input" placeholder="Name">
+                </label>
+                <label class="popup-auth__label input">
+                    <input class="popup-auth__input" placeholder="Last name">
+                </label>
+                <label class="popup-auth__label input">
+                    <div data-eye class="popup-auth__eye">
+                        <button data-eye-open class="popup-auth__eye-open active">
+                            <svg style="width: 24px; height: 24px;">
+                                <use xlink:href="./images/eye.svg#eye"></use>
+                            </svg>
+                        </button>
+                        <button data-eye-close class="popup-auth__eye-close">
+                            <svg style="width: 24px; height: 24px;">
+                                <use xlink:href="./images/eye-close.svg#eye-close"></use>
+                            </svg>
+                        </button>
+                    </div>
+                    <input class="popup-auth__input" type="password" placeholder="Password">
+                </label>
+                <label class="popup-auth__label input">
+                    <div data-eye class="popup-auth__eye">
+                        <button data-eye-open class="popup-auth__eye-open active">
+                            <svg style="width: 24px; height: 24px;">
+                                <use xlink:href="./images/eye.svg#eye"></use>
+                            </svg>
+                        </button>
+                        <button data-eye-close class="popup-auth__eye-close">
+                            <svg style="width: 24px; height: 24px;">
+                                <use xlink:href="./images/eye-close.svg#eye-close"></use>
+                            </svg>
+                        </button>
+                    </div>
+                    <input class="popup-auth__input" type="password" placeholder="Repeat password">
+                </label>
+                <button class="popup-auth__submit send">Submit</button>
+            </form>
+
+            <button data-popup-link="2" class="popup-auth__bottom-btn">Я вже зареєстрований</button>
+        </div>
+    </div>
     <div class="popup-complete"></div>
     <div class="popup-delete"></div>
 
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
     <script type="module" src="./js/main.js"></script>
 </body>
 </html>

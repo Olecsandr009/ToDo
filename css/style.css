@@ -113,7 +113,12 @@ body {
     height: 50px;
     border-radius: 50%;
     box-shadow: 0.0em -0.1em 0em var(--color-secondary);
-    transition: box-shadow .5s;
+    transition: box-shadow .3s, transform .3s;
+    cursor: pointer;
+}
+.aside__user:active {
+    box-shadow: 0.0em 0em 0em var(--color-secondary);
+    transform: translateY(-3px);
 }
 .aside__user::after {
     content: "";
@@ -348,6 +353,7 @@ body {
     border-radius: 8px;
     position: relative;
     transition: border-color .3s, padding .3s;
+    display: block;
 }
 .input::after {
     content: "✖";
@@ -464,7 +470,7 @@ body {
 .popup-shadow {
     width: 100%;
     height: 100%;
-    background-color: var(--color-primary);
+    background-color: var(--color-background);
     backdrop-filter: blur(4px);
     opacity: .5;
 }
@@ -495,10 +501,8 @@ body {
     justify-content: center;
     font-size: 24px;
     transition: color .3s;
-}
-.popup-settings__close:hover {
-    color: var(--color-secondary);
-    transition: color .5s;
+    z-index: 10;
+    color: var(--color-warning);
 }
 .popup-settings__aside {
     flex: 0 0 25%;
@@ -563,6 +567,9 @@ body {
     pointer-events: all;
     opacity: 1;
 }
+
+/*==------- theme -------==*/
+
 .theme__title {
     font-size: 40px;
     font-weight: 500;
@@ -603,3 +610,139 @@ body {
     transition: opacity .3s;
 }
 .theme__btn.active {}
+
+/*==-------------- Popup Auth --------------==*/
+
+.popup-auth {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .3s;
+}
+.popup-auth.active {
+    pointer-events: all;
+    opacity: 1;
+}
+.popup-auth.active .popup-shadow {
+    opacity: .5;
+}
+.popup-auth.active .popup-auth__modal {
+    transform: translate(-50%, -50%);
+    pointer-events: all;
+    opacity: 1;
+}
+
+.popup-auth__modal {
+    position: absolute;
+    width: 500px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 150%);
+    background-color: var(--color-primary);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .3s, opacity .3s;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+.popup-auth__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-warning);
+}
+.popup-auth__title {
+    text-align: center;
+    font-size: 42px;
+    font-weight: 600;
+    color: var(--color-title);
+    margin-bottom: 30px;
+}
+.popup-auth__form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 80%;
+}
+.popup-auth__label {
+    position: relative;
+}
+.popup-auth__eye {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 50%;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+.popup-auth__eye-open {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .3s;
+    cursor: pointer;
+}
+.popup-auth__eye-open.active {
+    opacity: 1;
+    pointer-events: all;
+}
+.popup-auth__eye-open svg {
+    fill: var(--color-secondary)
+}
+.popup-auth__eye-close {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .3s;
+    cursor: pointer;
+}
+.popup-auth__eye-close.active {
+    opacity: 1;
+    pointer-events: all;
+}
+.popup-auth__eye-close svg {
+    fill: var(--color-secondary)
+}
+.popup-auth__submit {
+    margin-bottom: 16px;
+}
+.popup-auth__bottom-btn {
+    text-align: center;
+    color: var(--color-text);
+    transition: color .3s;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+.popup-auth__bottom-btn:hover {
+    color: var(--color-title);
+}

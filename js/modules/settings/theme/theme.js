@@ -7,12 +7,16 @@ const root = document.documentElement
 let colors
 
 document.addEventListener("DOMContentLoaded", async e => {
-    colors = await json("../../../json/colors.json")
-
-    colorList(colors)
-
-    setTheme(colors, colors[0]["--color-secondary"])
-    document.querySelectorAll("[data-theme-item]")[0].classList.add("active")
+    try {
+        colors = await json("../../../json/colors.json")
+        
+        colorList(colors)
+        
+        setTheme(colors, colors[0]["--color-secondary"])
+        document.querySelectorAll("[data-theme-item]")[0].classList.add("active")
+    } catch(e) {
+        console.log(e)
+    }
 })
 
 theme.addEventListener("click", e => {
@@ -33,7 +37,7 @@ theme.addEventListener("click", e => {
 function colorList(colors) {
     theme.innerHTML = ""
 
-    if(colors.length) {
+    if(colors && colors.length) {
         colors.forEach(color => {
             theme.insertAdjacentHTML("beforeend", item(color["--color-secondary"]))
         })
