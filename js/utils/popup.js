@@ -65,7 +65,21 @@ function allClose(popups, link) {
         popups.forEach(element => {
             element.classList.remove("active")
 
+            clearInputs(element)
+
             if(link) link.classList.remove("active")
+        })
+    }
+}
+
+function clearInputs(popup) {
+    const inputs = popup.querySelectorAll('input')
+
+    if(inputs) {
+        inputs.forEach(element => {
+            element.value = ""
+
+            element.parentElement.classList.remove("warning")
         })
     }
 }

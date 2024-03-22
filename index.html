@@ -232,10 +232,11 @@
             <h3 class="popup-auth__title">Login</h3>
 
             <form class="popup-auth__form" action="#">
-                <label class="popup-auth__label input">
-                    <input class="popup-auth__input" placeholder="Login"/>
+                <label data-login-email class="popup-auth__label input">
+                    <input class="popup-auth__input" autocomplete="off" type="email" placeholder="Email"/>
+                    <p class="popup-auth__warning">Електронна пошта введена не вірно</p>
                 </label>
-                <label class="popup-auth__label input">
+                <label data-login-pass class="popup-auth__label input">
                     <div data-eye class="popup-auth__eye">
                         <button data-eye-open class="popup-auth__eye-open active">
                             <svg style="width: 24px; height: 24px;">
@@ -248,10 +249,19 @@
                             </svg>
                         </button>
                     </div>
-                    <input data-input-pass class="popup-auth__input" type="password" placeholder="Password"/>
+                    <input data-input-pass class="popup-auth__input" autocomplete="off" type="password" placeholder="Password"/>
+                    <p class="popup-auth__warning">Пароль має містити великі літери цифри і 8 символів</p>
                 </label>
-                <button class="popup-auth__submit send">Submit</button>
+
+                <button data-login-google class="popup-auth__google google">
+                    <img src="./images/google.png" alt="google" />
+                    <span>Увійти за допомогою google</span>
+                </button>
+                
+                <button data-login-submit class="popup-auth__submit send">Submit</button>
             </form>
+                
+
 
             <button data-popup-link="3" class="popup-auth__bottom-btn">Зареєструватися</button>
         </div>
@@ -264,13 +274,19 @@
             <h3 class="popup-auth__title">Registration</h3>
 
             <form class="popup-auth__form">
-                <label class="popup-auth__label input">
-                    <input class="popup-auth__input" placeholder="Name">
+                <label data-reg-name class="popup-auth__label input">
+                    <input class="popup-auth__input" autocomplete="off" placeholder="Name">
+                    <p class="popup-auth__warning">Введіть коректно ваше ім'я</p>
                 </label>
-                <label class="popup-auth__label input">
-                    <input class="popup-auth__input" placeholder="Last name">
+                <label data-reg-first class="popup-auth__label input">
+                    <input class="popup-auth__input" autocomplete="off" placeholder="Last name">
+                    <p class="popup-auth__warning">Введіть коректно ваше прізвище</p>
                 </label>
-                <label class="popup-auth__label input">
+                <label data-reg-email class="popup-auth__label input">
+                    <input class="popup-auth__input" autocomplete="off" type="email" placeholder="Last name">
+                    <p class="popup-auth__warning">Електронна пошта введена не вірно</p>
+                </label>
+                <label data-reg-pass class="popup-auth__label input">
                     <div data-eye class="popup-auth__eye">
                         <button data-eye-open class="popup-auth__eye-open active">
                             <svg style="width: 24px; height: 24px;">
@@ -283,9 +299,10 @@
                             </svg>
                         </button>
                     </div>
-                    <input class="popup-auth__input" type="password" placeholder="Password">
+                    <input class="popup-auth__input" autocomplete="off" type="password" placeholder="Password">
+                    <p class="popup-auth__warning">Пароль має містити великі літери цифри і 8 символів</p>
                 </label>
-                <label class="popup-auth__label input">
+                <label data-reg-repeat class="popup-auth__label input">
                     <div data-eye class="popup-auth__eye">
                         <button data-eye-open class="popup-auth__eye-open active">
                             <svg style="width: 24px; height: 24px;">
@@ -298,9 +315,10 @@
                             </svg>
                         </button>
                     </div>
-                    <input class="popup-auth__input" type="password" placeholder="Repeat password">
+                    <input class="popup-auth__input" autocomplete="off" type="password" placeholder="Repeat password">
+                    <p class="popup-auth__warning">Паролі не збігаються</p>
                 </label>
-                <button class="popup-auth__submit send">Submit</button>
+                <button data-reg-submit class="popup-auth__submit send">Submit</button>
             </form>
 
             <button data-popup-link="2" class="popup-auth__bottom-btn">Я вже зареєстрований</button>

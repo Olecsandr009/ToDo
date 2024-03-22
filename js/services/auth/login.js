@@ -1,4 +1,8 @@
-import db from '../../assets/firegase.js'
+import db from '../../assets/firebaseConf.js'
+
+const actionCodeSettings = {
+    url: ""
+}
 
 export async function login() {
     try {

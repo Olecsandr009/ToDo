@@ -5,8 +5,6 @@ if(eye.length) {
         element.addEventListener("click", e => {
             e.preventDefault()
 
-            console.log("eye")
-
             const currentInput = e.currentTarget.parentElement.querySelector("input")
 
             if(e.target.closest("[data-eye-open]")) {
