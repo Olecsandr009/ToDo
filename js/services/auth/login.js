@@ -1,29 +1,22 @@
-import db from '../../assets/firebaseConf.js'
+import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js'
+import {} from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js'
+import { db } from '../../assets/firebaseConf.js'
 
-const actionCodeSettings = {
-    url: ""
-}
+const auth = getAuth()
 
-export async function login() {
-    try {
-        const docRef = await addDoc(collection(db, "users"), {
-            created: "",
-            firstName: "",
-            name: "",
-            telegramId: ""
-        })
-
-        console.log(docRef.id);
-    } catch(e) {
-        console.log("Error to login: ", e)
-    }
-}
-
-/* login
-
-при логіні потрібно порівняти зі всіма користувачами і якщо такий користувач є 
-то залогінити
+// createUserWithEmailAndPassword(auth, "sasha2005vit@gmail.com", "bibaboba1234")
+//     .then(userCredentials => {
+//         const user = userCredentials.user
+//         console.log(user)
+//     }).catch(error => {
+//         console.log(error)
+//     })
 
 
-
-*/
+// signInWithEmailAndPassword(auth, "sasha2005vit@gmail.com", "bibaboba1234")
+//     .then(userCredentials => {
+//         const user = userCredentials.user
+//         console.log(user)
+//     }).catch(error => {
+//         console.log(error.code, error.message)
+//     })

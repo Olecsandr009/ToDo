@@ -115,22 +115,60 @@ body {
 }
 
 .aside__user {
-    text-align: center;
     position: absolute;
     right: 20px;
     bottom: 20px;
     width: 50px;
     height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.aside__result-user {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.aside__result-user.active {
+    pointer-events: all;
+    opacity: 1;
+}
+
+.aside__user-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 50%;
     box-shadow: 0.0em -0.1em 0em var(--color-secondary);
-    transition: box-shadow .3s, transform .3s;
     cursor: pointer;
+    transform: translateY(3px);
+    pointer-events: none;
+    opacity: 0;
+    transition: box-shadow .3s, transform .3s, opacity .3s;
 }
-.aside__user:active {
+.aside__user-btn.no-auth {
+    pointer-events: all;
+    opacity: 1;
+}
+.aside__user-btn:active {
     box-shadow: 0.0em 0em 0em var(--color-secondary);
     transform: translateY(-3px);
 }
-.aside__user::after {
+.aside__user-btn::after {
     content: "";
     position: absolute;
     width: 90%;
@@ -141,7 +179,7 @@ body {
     transform: translate(-50%, -50%);
     border-radius: 50%;
 }
-.aside__user svg {
+.aside__user-btn svg {
     fill: var(--color-text)
 }
 
@@ -212,7 +250,7 @@ body {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 18px;
 }
 
 .aside__label {}
@@ -255,7 +293,7 @@ body {
 
 .content__blocks {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
 }
 
@@ -313,7 +351,7 @@ body {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 180px;
+    width: 260px;
 }
 
 .content__block-text {
@@ -381,10 +419,12 @@ body {
     transform: translateY(-50%);
     font-size: 14px;
     opacity: 0;
+    pointer-events: none;
     transition: opacity .3s;
 }
 
-.input input {
+.input input,
+.input textarea {
     width: 100%;
     border: none;
     background-color: transparent;
@@ -394,18 +434,22 @@ body {
     transition: caret-color .5s;
 }
 
+.input textarea {
+    resize: none;
+    height: 120px;
+}
+
 .input input:valid {
     background-color: transparent;
 }
-
-.input input:-aut
 
 .input input:-webkit-autofill {
     -webkit-animation-name: autofill;
     -webkit-animation-fill-mode: both;
 }
 
-.input input::placeholder {
+.input input::placeholder,
+.input textarea::placeholder {
     color: var(--color-input-text);
     transition: color .3s;
 }
@@ -417,9 +461,11 @@ body {
 .input.warning::after {
     opacity: 1;
 }
-.input.warning input {
+.input.warning input
+.input.warning textarea {
     color: var(--color-warning);
 }
+.input.warning textarea::placeholder,
 .input.warning input::placeholder {
     color: var(--color-warning);
 }

@@ -25,3 +25,23 @@ export function onText(text) {
 
     return true
 }
+
+export function onTitle(text) {
+    const regex = /^.{1,20}$/
+
+    if(text.length <= 0) return false
+
+    if(!regex.test(text)) return false
+
+    return true
+}
+
+export function onTextarea(text) {
+    const regex = /^.{1,200}$/
+
+    if(text.length <= 0) return false
+
+    if(!regex.test(text)) return false
+
+    return true
+}

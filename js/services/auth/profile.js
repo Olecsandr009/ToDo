@@ -1,27 +1,11 @@
-export function profileGoogle() {
-    getRedirectResult(auth, provider)
-        .then(result => {
-            const credential = GoogleAuthProvider.credentialFromResult(result)
-            const token = credential.accessToken
+import { getAuth } from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js'
 
-            const user = result.user
-            console.log(user)
-        }).catch(error => {
-            const errorCode = error.code
-            const errorMessage = error.message
-            
-            console.log(errorMessage)
-
-            const email = error.customData.email
-
-            const credential = GoogleAuthProvider.credentialFromError(error)
-        })
-}
-
-export function profileAuth() {
-    onAuthStateChanged(user => {
-        console.log(user => {
-            if(user) console.log(user)
-        })
+export async function getUser() {
+    return new Promise((resolve, reject) => {
+        const auth = getAuth()
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            unsubscribe()
+            resolve(user || null)
+        }, reject)
     })
 }

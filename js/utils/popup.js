@@ -7,7 +7,7 @@ if(popupLinks.length) {
     popupLinks.forEach(element => {
         element.addEventListener('click', e => {
             e.preventDefault()
-            allClose(popups, currentLink)
+            allClose()
 
             currentLink = e.currentTarget;
             
@@ -60,14 +60,14 @@ function closePopup(popup) {
     currentLink.classList.remove("active")
 }
 
-function allClose(popups, link) {
+export function allClose() {
     if(popups.length) {
         popups.forEach(element => {
             element.classList.remove("active")
 
             clearInputs(element)
 
-            if(link) link.classList.remove("active")
+            if(currentLink) currentLink.classList.remove("active")
         })
     }
 }

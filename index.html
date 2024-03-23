@@ -14,11 +14,16 @@
         <!-- <header class="header"></header> -->
         <main class="main">
             <aside class="aside">
-                <button data-popup-link="2" class="aside__user">
-                    <svg style="width: 24px; height: 24px;">
-                        <use xlink:href="./images/user.svg#user"></use>
-                    </svg>
-                </button>
+                <div class="aside__user">
+                    <button data-no-auth data-popup-link="2" class="aside__user-btn no-auth">
+                        <svg style="width: 24px; height: 24px;">
+                            <use xlink:href="./images/user.svg#user"></use>
+                        </svg>
+                    </button>
+                    <div data-auth class="aside__result-user">
+                        <img src="" alt="Ava">
+                    </div>
+                </div>
                 <button class="aside__burger active">
                     <span></span>
                     <span></span>
@@ -29,13 +34,21 @@
                 <p class="aside__text">Що бажаєте зробити в майбутньому?</p>
 
                 <form class="aside__form" action="/">
-                    <label class="aside__label input">
+                    <label data-task-title class="aside__label input">
                         <input class="aside__input" placeholder="Name">
+                        <p class="popup-auth__warning">Текст повинен містити 1-20 символів</p>
                     </label>
-                    <label class="aside__label input">
-                        <input class="aside__input" placeholder="description">
+                    <!-- <div class="aside__form-wrapper">
+                        <label class="aside__label input">
+                            <input class="aside__input" type="date" placeholder="Deadline"/>
+                        </label>
+                        <button data-date class="aside__button-date"></button>
+                    </div> -->
+                    <label data-task-desk class="aside__label input">
+                        <textarea class="aside__textarea" placeholder="Description"></textarea>
+                        <p class="popup-auth__warning">Текст повинен містити 1-200 символів</p>
                     </label>
-                    <button class="aside__button send">Send</button>
+                    <button data-task-send class="aside__button send">Send</button>
                 </form>
 
                 <button data-popup-link="1" class="aside__settings">
@@ -46,147 +59,7 @@
                 </button>
             </aside>
             <div class="content">
-                <div class="content__blocks">
-                    <div class="content__block block-complete">
-                        <button class="content__block-close">&#x2716;</button>
-
-                        <div class="content__flags">
-                            <span class="complete"></span>
-                        </div>
-
-                        
-                        <h3 class="content__block-title">Create task</h3>
-                        <p class="content__block-text">Create task by lesson task Creatsk Create taskson task</p>
-                        <p class="content__block-deadline">12:12:1222</p>
-                        <button class="content__block-complete-btn send">Complete</button>
-                    </div>
-                    <div class="content__block">
-                        <button class="content__block-close">&#x2716;</button>
-
-                        <div class="content__flags">
-                            <span class="complete"></span>
-                            <span class="term"></span>
-                        </div>
-
-                        
-                        <h3 class="content__block-title">Create task</h3>
-                        <p class="content__block-text">Create task by lesson task Creatsk Create taskson task</p>
-                        <p class="content__block-deadline">12:12:1222</p>
-                        <button class="content__block-complete-btn send">Complete</button>
-                    </div>
-                    <div class="content__block">
-                        <button class="content__block-close">&#x2716;</button>
-
-                        <div class="content__flags">
-                            <span class="term"></span>
-                        </div>
-
-                        <h3 class="content__block-title">Create task</h3>
-                        <p class="content__block-text">Create task by lesson task Creatsk Create taskson task</p>
-                        <p class="content__block-deadline">12:12:1222</p>
-                        <button class="content__block-complete-btn send">Complete</button>
-                    </div>
-                    <div class="content__block">
-                        <button class="content__block-close">&#x2716;</button>
-
-                        <div class="content__flags">
-                        </div>
-
-                        
-                        <h3 class="content__block-title">Create task</h3>
-                        <p class="content__block-text">Create task by lesson task Creatsk Create taskson task</p>
-                        <p class="content__block-deadline">12:12:1222</p>
-                        <button class="content__block-complete-btn send">Complete</button>
-                    </div>
-                    <div class="content__block">
-                        <button class="content__block-close">&#x2716;</button>
-
-                        <div class="content__flags">
-                            <span class="complete"></span>
-                        </div>
-
-                        
-                        <h3 class="content__block-title">Create task</h3>
-                        <p class="content__block-text">Create task by lesson task Creatsk Create taskson task</p>
-                        <p class="content__block-deadline">12:12:1222</p>
-                        <button class="content__block-complete-btn send">Complete</button>
-                    </div>
-                    <div class="content__block">
-                        <button class="content__block-close">&#x2716;</button>
-
-                        <div class="content__flags">
-                            <span class="complete"></span>
-                            <span class="term"></span>
-                        </div>
-
-                        
-                        <h3 class="content__block-title">Create task</h3>
-                        <p class="content__block-text">Create task by lesson task Creatsk Create taskson task</p>
-                        <p class="content__block-deadline">12:12:1222</p>
-                        <button class="content__block-complete-btn send">Complete</button>
-                    </div>
-                    <div class="content__block">
-                        <button class="content__block-close">&#x2716;</button>
-
-                        <div class="content__flags">
-                            <span class="term"></span>
-                        </div>
-
-                        
-                        <h3 class="content__block-title">Create task Create task Create task</h3>
-                        <p class="content__block-text">
-                            Create task by lesson task Creatsk Create taskson task
-                            Create task by lesson task Creatsk Create taskson task
-                            Create task by lesson task Creatsk Create taskson task
-                            Create task by lesson task Creatsk Create taskson task
-                            Create task by lesson task Creatsk Create taskson task
-                            Create task by lesson task Creatsk Create taskson task
-                            Create task by lesson task Creatsk Create taskson task
-                            Create task by lesson task Creatsk Create taskson task
-                        </p>
-                        <p class="content__block-deadline">12:12:1222</p>
-                        <button class="content__block-complete-btn send">Complete</button>
-                    </div>
-                    <div class="content__block">
-                        <button class="content__block-close">&#x2716;</button>
-
-                        <div class="content__flags">
-                        </div>
-
-                        
-                        <h3 class="content__block-title">Create task</h3>
-                        <p class="content__block-text">Create task by lesson task Creatsk Create taskson task</p>
-                            <p class="content__block-deadline">12:12:1222</p>
-                        <button class="content__block-complete-btn send">Complete</button>
-                    </div>
-                    <div class="content__block">
-                        <button class="content__block-close">&#x2716;</button>
-
-                        <div class="content__flags">
-                            <span class="complete"></span>
-                        </div>
-
-                        
-                        <h3 class="content__block-title">Create task </h3>
-                        <p class="content__block-text">Create task by lesson task Creatsk Create taskson task</p>
-                            <p class="content__block-deadline">12:12:1222</p>
-                        <button class="content__block-complete-btn send">Complete</button>
-                    </div>
-                    <div class="content__block">
-                        <button class="content__block-close">&#x2716;</button>
-
-                        <div class="content__flags">
-                            <span class="complete"></span>
-                            <span class="term"></span>
-                        </div>
-
-                        
-                        <h3 class="content__block-title">Create task</h3>
-                        <p class="content__block-text">Create task by lesson task Creatsk Create taskson task</p>
-                        <p class="content__block-deadline">12:12:1222</p>
-                        <button class="content__block-complete-btn send">Complete</button>
-                    </div>
-                </div>
+                <div data-task-list class="content__blocks"></div>
             </div>
         </main>
         <footer class="footer"></footer>
@@ -257,7 +130,7 @@
                     <img src="./images/google.png" alt="google" />
                     <span>Увійти за допомогою google</span>
                 </button>
-                
+
                 <button data-login-submit class="popup-auth__submit send">Submit</button>
             </form>
                 
@@ -327,8 +200,8 @@
     <div class="popup-complete"></div>
     <div class="popup-delete"></div>
 
-    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script> -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script> -->
     <script type="module" src="./js/main.js"></script>
 </body>
 </html>
