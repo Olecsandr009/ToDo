@@ -574,13 +574,12 @@ body {
     top: 16px;
     left: 10px;
     color: var(--color-text);
-    pointer-events: all;
+    pointer-events: none;
     opacity: 1;
-    transition: opacity .2s;
+    transition: opacity .05s;
 }
 
 .input .placeholder.value {
-    pointer-events: none;
     opacity: 0;
 }
 

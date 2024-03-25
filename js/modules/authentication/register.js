@@ -1,4 +1,4 @@
-import { onEmail, onPassword, onText } from "../../utils/validate.js"
+import { onEmail, onPassword, onRepeat, onText } from "../../utils/validate.js"
 
 const name = document.querySelector("[data-reg-name]")
 const firstName = document.querySelector("[data-reg-first]")
@@ -36,7 +36,7 @@ if(submit) {
         if(!onPassword(passwordValue, password)) password.classList.add("warning")
         else password.classList.remove("warning")
 
-        if(passwordValue.toString() != repeatValue.toString()) repeat.classList.add("warning")
+        if(!onRepeat(passwordValue, repeatValue, repeat)) repeat.classList.add("warning")
         else repeat.classList.remove("warning")
 
         if(

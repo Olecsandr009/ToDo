@@ -20,6 +20,24 @@ export function onPassword(text, password, login = false) {
     return true
 }
 
+export function onRepeat(pass, repeat, element) {
+    if(element) {
+        const currentElement = element.querySelector("[data-warning]")
+
+        if(repeat.length <= 0) {
+            getWarning(currentElement, "input")
+            return false
+        }
+
+        if(pass.toString() != repeat.toString()) {
+            getWarning(currentElement, "repeatPass")
+            return false
+        }
+    }
+
+    return true
+}
+
 export function onEmail(text, email) {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 

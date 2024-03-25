@@ -6,6 +6,7 @@ import "./utils/eye.js"
 import "./utils/calendar.js"
 import "./utils/burger.js"
 import "./utils/alert.js"
+import "./utils/placeholder.js"
 
 import "./modules/settings/theme/theme.js"
 
