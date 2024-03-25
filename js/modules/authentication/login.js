@@ -16,10 +16,10 @@ if(submit) {
         if(email) emailValue = email.querySelector("input").value
         if(password) passValue = password.querySelector("input").value
 
-        if(!onEmail(emailValue)) email.classList.add("warning")
+        if(!onEmail(emailValue, email)) email.classList.add("warning")
         else email.classList.remove("warning")
 
-        if(!onPassword(passValue)) password.classList.add("warning")
+        if(!onPassword(passValue, password, true)) password.classList.add("warning")
         else password.classList.remove("warning")
 
         if(onEmail(emailValue) && onPassword(passValue)) {

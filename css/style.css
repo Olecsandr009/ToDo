@@ -44,6 +44,21 @@ img {
 
 input, textarea {
     -webkit-user-select: auto;
+    font-family: "Poppins", sans-serif;
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+input[type="date"][value=""] {
+    user-select: none;
 }
 
 button {
@@ -54,7 +69,7 @@ button {
 
 body {
     height: 100vh;
-    font-family: "Poppins", sans-serif;;
+    font-family: "Poppins", sans-serif;
     line-height: 1;
     font-size: 16px;
     overflow: hidden;
@@ -101,17 +116,48 @@ body {
 
 /*==------- Aside -------==*/
 
+.empty {
+    width: 100px;
+    flex: 0 0 auto;
+    transition: width .3s;
+}
+.aside.active ~ .empty {
+    width: 370px;
+}
 .aside {
-    flex: 0 0 25%;
+    width: 370px;
     background-color: var(--color-primary);
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
+    position: absolute;
     border-right: 4px solid var(--color-secondary);
     border-radius: 0 0 8px 0;
     padding: 20px;
-    transition: border-right .5s;
+    z-index: 5;
+    top: 0;
+    left: 0;
+    height: 100%;
+    transform: translateX(-75%);    
+    transition: border-right .5s, transform .3s;
+}
+
+.aside.active {
+    transform: translateX(0);
+}
+
+.aside__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s;
+}
+
+.aside.active .aside__wrapper {
+    opacity: 1;
+    pointer-events: all;
 }
 
 .aside__user {
@@ -122,6 +168,11 @@ body {
     height: 50px;
     display: flex;
     align-items: center;
+    transform: translateY(-60px);
+    transition: transform .3s;
+}
+.aside.active .aside__user {
+    transform: translateY(0);
 }
 
 .aside__result-user {
@@ -135,12 +186,19 @@ body {
     justify-content: center;
     pointer-events: none;
     opacity: 0;
-    border-radius: 50%;
-    overflow: hidden;
 }
 .aside__result-user.active {
     pointer-events: all;
     opacity: 1;
+}
+.aside__result-user-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
 }
 
 .aside__user-btn {
@@ -191,8 +249,13 @@ body {
     justify-content: space-between;
     position: absolute;
     top: 20px;
-    right: 20px;
-    cursor: pointer
+    right: 26px;
+    cursor: pointer;
+    transform: translateX(0);
+    transition: transform .3s;
+}
+.aside.active .aside__burger {
+    transform: translateX(6px);
 }
 .aside__burger span {
     display: block;
@@ -200,11 +263,9 @@ body {
     height: 2px;
     border-radius: 8px;
     background-color: var(--color-text);
-    transition: transform .3s, opacity .3s, background-color 1s;
 }
 .aside__burger:hover span {
     background-color: var(--color-secondary);
-    transition: background-color .5s;
 }
 
 .aside__burger span:nth-child(1),
@@ -216,11 +277,23 @@ body {
     width: 40px;
 }
 
+.aside__burger span:nth-child(1) {
+    transform: rotate(0deg);
+    transition: transform .3s, background-color .3s;
+}
 .aside__burger.active span:nth-child(1) {
     transform: rotate(45deg);
 }
+.aside__burger span:nth-child(2) {
+    opacity: 1;
+    transition: opacity .3s, background-color .3s;
+}
 .aside__burger.active span:nth-child(2) {
     opacity: 0;
+}
+.aside__burger span:nth-child(3) {
+    transform: rotate(0deg);
+    transition: transform .3s, background-color .3s;
 }
 .aside__burger.active span:nth-child(3) {
     transform: rotate(-45deg);
@@ -251,6 +324,25 @@ body {
     display: flex;
     flex-direction: column;
     gap: 18px;
+    position: relative;
+}
+
+.aside__form-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.aside__button-date {
+    flex: 0 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--color-text);
+    border-radius: 8px;
+    padding: 11px 10px;
+}
+.aside__button-date svg {
+    fill: var(--color-secondary);
 }
 
 .aside__label {}
@@ -262,24 +354,42 @@ body {
     display: flex;
     align-items: center;
     gap: 6px;
-    margin-top: auto;
     color: var(--color-text);
     padding: 8px 16px;
-    margin-right: auto;
+    position: absolute;
+    bottom: 20px;
+    left: 15px;
+    z-index: 5;
+}
+.aside.active ~ .aside__settings {
 }
 .aside__settings span {
+    opacity: 0;
+    pointer-events: none;
     transition: transform .6s;
 }
-.aside__settings:hover span {
+.aside.active ~ .aside__settings span {
+    opacity: 1;
+    pointer-events: all;
+}
+.aside.active ~ .aside__settings:hover span {
     transform: translateX(4px);
 }
 
 .aside__settings svg {
     fill: var(--color-text);
-    transition: transform .6s;
+    transform: scale(2.8);
+    transition: transform .3s, font-size .3s;
+}
+.aside__settings:hover svg {
+    transform: rotate(90deg) scale(2.8);
 }
 
-.aside__settings:hover svg {
+.aside.active ~ .aside__settings svg {
+    transform: scale(1);
+}
+
+.aside.active ~ .aside__settings:hover svg {
     transform: rotate(180deg);
 }
 
@@ -287,14 +397,24 @@ body {
 
 .content {
     height: 100vh;
+    flex: 0 1 100%;
     overflow: auto;
     padding: 40px;
 }
+
+
 
 .content__blocks {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
+    justify-items: center;
+}
+
+@media(max-width: 1500px) {
+    .content__blocks {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 .content__block {
@@ -304,6 +424,7 @@ body {
     padding-left: 40px;
     border-radius: 8px;
     position: relative;
+    max-width: 330px;
 }
 
 .content__block:hover {
@@ -448,6 +569,21 @@ body {
     -webkit-animation-fill-mode: both;
 }
 
+.input .placeholder {
+    position: absolute;
+    top: 16px;
+    left: 10px;
+    color: var(--color-text);
+    pointer-events: all;
+    opacity: 1;
+    transition: opacity .2s;
+}
+
+.input .placeholder.value {
+    pointer-events: none;
+    opacity: 0;
+}
+
 .input input::placeholder,
 .input textarea::placeholder {
     color: var(--color-input-text);
@@ -461,7 +597,7 @@ body {
 .input.warning::after {
     opacity: 1;
 }
-.input.warning input
+.input.warning input,
 .input.warning textarea {
     color: var(--color-warning);
 }
@@ -516,6 +652,37 @@ body {
 
 .send:active {
     opacity: .8;
+}
+
+.true {
+    color: var(--color-primary);
+    background-color: var(--color-secondary);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 18px;
+    border: 2px solid var(--color-secondary);
+    opacity: .8;
+    cursor: pointer;
+    transition: opacity .3s;
+}
+.true:hover {
+    opacity: 1;
+}
+
+.false {
+    color: var(--color-text);
+    background-color: transparent;
+    border: 2px solid var(--color-text);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color .3s, color .3s;
+}
+
+.false:hover {
+    background-color: var(--color-text);
+    color: var(--color-primary);
 }
 
 /*==------- Google -------==*/
@@ -583,6 +750,7 @@ body {
     opacity: 0;
     pointer-events: none;
     transition: opacity .3s;
+    z-index: 100;
 }
 .popup-settings.active {
     opacity: 1;
@@ -594,11 +762,13 @@ body {
 }
 
 .popup-shadow {
+    position: relative;
     width: 100%;
     height: 100%;
     background-color: var(--color-background);
     backdrop-filter: blur(4px);
     opacity: .5;
+    z-index: 3;
 }
 
 .popup-settings .popup-settings__modal {
@@ -613,6 +783,7 @@ body {
     display: flex;
     overflow: hidden;
     transition: opacity .3s, transform .3s;
+    z-index: 100;
 }
 
 .popup-settings__close {
@@ -778,6 +949,7 @@ body {
     align-items: center;
     justify-content: center;
     border-radius: 8px;
+    z-index: 100;
 }
 .popup-auth__close {
     position: absolute;
@@ -871,6 +1043,305 @@ body {
 }
 .popup-auth__bottom-btn:hover {
     color: var(--color-title);
+}
+
+/*==-------------- Popup Calendar --------------==*/
+
+.popup-date {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .3s;
+}
+.popup-date.active {
+    pointer-events: all;
+    opacity: 1;
+}
+.popup-date.active .popup-shadow {
+    opacity: .5;
+}
+.popup-date.active .aside__calendar {
+    transform: translate(-20px, -50%);
+    pointer-events: all;
+    opacity: 1;
+}
+.aside__calendar {
+    position: absolute;
+    top: 45%;
+    left: 370px;
+    width: 250px;
+    transform: translate(-100%, -50%);
+    background-color: var(--color-primary);
+    padding: 16px;
+    padding-left: 32px;
+    border: 2px solid var(--color-secondary);
+    border-radius: 8px;
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0;
+    transition: transform .3s, opacity .3s;
+}
+.aside__calendar-title {
+    color: var(--color-title);
+    text-align: center;
+    margin-bottom: 16px;
+}
+.aside__calendar-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    color: var(--color-warning);
+    cursor: pointer;
+}
+.aside__calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+.aside__calendar-date {
+    color: var(--color-text);
+}
+.aside__calendar-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+.aside__calendar-prev,
+.aside__calendar-next {
+    color: var(--color-text);
+    padding: 4px;
+    border: 1px solid var(--color-secondary);
+    border-radius: 4px;
+    box-shadow: 0em 0.1em 0.1em var(--color-secondary);
+    cursor: pointer;
+}
+.aside__calendar-body {}
+.aside__calendar-weekday {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    justify-items: center;
+    gap: 4px;
+}
+.aside__calendar-weekday li {
+    color: var(--color-text);
+    font-size: 16px;
+}
+.aside__calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 8px;
+    column-gap: 4px;
+    row-gap: 2px;
+}
+.aside__calendar-day {
+    color: var(--color-text);
+    text-align: center;
+    font-size: 14px;
+    padding: 2px 1px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border .3s;
+}
+.aside__calendar-day.active {
+    border-color: var(--color-secondary);
+}
+.aside__calendar-day:hover {
+    border-color: var(--color-title);
+}
+.aside__calendar-disabled {
+    color: var(--color-text);
+    text-align: center;
+    font-size: 14px;
+    padding: 2px 1px;
+    border: 1px solid transparent;
+    opacity: .6;
+    cursor: default;
+}
+
+/*==-------------- Popup Logout --------------==*/
+
+.popup-logout {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s;
+}
+.popup-logout.active {
+    opacity: 1;
+    pointer-events: all;
+}
+.popup-logout.active .popup-shadow {
+    opacity: .5;
+}
+
+.logout {
+    position: absolute;
+    background-color: var(--color-primary);
+    border-radius: 8px;
+    opacity: 0;
+    padding: 16px 32px;
+    border: 2px solid var(--color-secondary);
+    pointer-events: none;
+    bottom: 0;
+    left: 100px;
+    transform: translateX(-100%);
+    transition: transform .3s, opacity .3s;
+    z-index: 4;
+}
+.aside.active ~ .popup-logout .logout {
+    left: 370px;
+}
+.popup-logout.active .logout {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(-20px);
+}
+.logout__close {
+    position: absolute;
+    padding: 6px 8px;
+    top: 0;
+    right: 0;
+    color: var(--color-warning);
+    cursor: pointer;
+}
+.logout__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--color-text);
+    transition: color .3s;
+    cursor: pointer;
+}
+.logout__button svg {
+    fill: var(--color-text);
+    transition: fill .3s;
+}
+.logout__button:hover {
+    color: var(--color-title);
+}
+.logout__button:hover svg {
+    fill: var(--color-title)
+}
+
+/*==-------------- Popup Delete --------------==*/
+
+.popup-delete {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s;
+    z-index: 10;
+}   
+.popup-delete.active {
+    opacity: 1;
+    pointer-events: all;
+}
+.popup-delete.active .popup-shadow {
+    opacity: .5;
+}
+
+.popup-delete__modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 16px;
+    background-color: var(--color-primary);
+    border-radius: 8px;
+    padding-right: 32px;
+    pointer-events: none;
+    z-index: 100;
+    transform: translate(-50%, 100%);
+    transition: transform .3s;
+}
+.popup-delete.active .popup-delete__modal {
+    transform: translate(-50%, -50%);
+    pointer-events: all;
+}
+
+.popup-delete__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: var(--color-warning);
+    cursor: pointer;
+    padding: 4px 6px;
+    font-size: 18px;
+}
+.popup-delete__title {
+    color: var(--color-title);
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+.popup-delete__buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-end;
+}
+.popup-delete__btn {
+
+}
+
+/*==-------------- Alert Complete --------------==*/
+
+.alert {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    padding: 16px;
+    background-color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    gap: 12px;
+    transform: translate(-50%, 100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s, transform .3s;
+    box-shadow: 0.0em -0.1em 0em var(--color-secondary);
+}
+.alert.active {
+    opacity: 1;
+    pointer-events: all;
+    transform: translate(-50%, 0);
+}
+.alert__modal-title {
+    font-size: 20px;
+    color: var(--color-title);
+    display: flex;
+    align-items: center;
+    gap: 8px
+}
+.alert__modal-title svg {
+    fill: var(--color-complete);
+}
+.alert__modal-title.delete svg {
+    fill: var(--color-warning);
+}
+.alert__modal-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    padding: 4px 6px;
+    font-size: 18px;
+    color: var(--color-warning);
 }
 
 @keyframes autofill {

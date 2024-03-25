@@ -24,16 +24,16 @@ if(submit) {
         if(password) passwordValue = password.querySelector("input").value
         if(repeat) repeatValue = repeat.querySelector("input").value
 
-        if(!onText(nameValue)) name.classList.add("warning")
+        if(!onText(nameValue, name)) name.classList.add("warning")
         else name.classList.remove("warning")
 
-        if(!onText(firstValue)) firstName.classList.add("warning")
+        if(!onText(firstValue, firstName)) firstName.classList.add("warning")
         else firstName.classList.remove("warning")
 
-        if(!onEmail(emailValue)) email.classList.add("warning")
+        if(!onEmail(emailValue, email)) email.classList.add("warning")
         else email.classList.remove("warning")
 
-        if(!onPassword(passwordValue)) password.classList.add("warning")
+        if(!onPassword(passwordValue, password)) password.classList.add("warning")
         else password.classList.remove("warning")
 
         if(passwordValue.toString() != repeatValue.toString()) repeat.classList.add("warning")

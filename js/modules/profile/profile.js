@@ -15,16 +15,13 @@ const options = {
 
 export function getUserGoogle(option = options) {
     const auth = getAuth()
-
     auth.onAuthStateChanged(user => {
-        if(user) {
-            authHandler(user)
-            getTask()
-            
-            if(option.popupClose) {
-                allClose()
-            }
-        }   
+        authHandler(user)
+        getTask()
+
+        if(user && option.popupClose) {
+            allClose()
+        }
     })
 }
 

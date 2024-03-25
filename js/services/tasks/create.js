@@ -9,9 +9,10 @@ export async function setTask(data) {
         if(user) {
             data.userId = user.uid
             await addDoc(collection(db, "tasks"), data)
+            return true
+        } else {
+            return false
         }
-
-        return true
     } catch(e) {
         console.log(e)
     }

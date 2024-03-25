@@ -13,7 +13,7 @@
     <div class="wrapper">
         <!-- <header class="header"></header> -->
         <main class="main">
-            <aside class="aside">
+            <aside data-burger="1" data-primary class="aside active">
                 <div class="aside__user">
                     <button data-no-auth data-popup-link="2" class="aside__user-btn no-auth">
                         <svg style="width: 24px; height: 24px;">
@@ -21,43 +21,65 @@
                         </svg>
                     </button>
                     <div data-auth class="aside__result-user">
-                        <img src="" alt="Ava">
+                        <button data-popup-link="5" class="aside__result-user-btn">
+                            <img src="" alt="Ava">
+                        </button>
                     </div>
                 </div>
-                <button class="aside__burger active">
+                <button data-burger-link="1" data-primary class="aside__burger active toggle">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
 
-                <h1 class="aside__title">TODO App</h1>
-                <p class="aside__text">Що бажаєте зробити в майбутньому?</p>
+                <div class="aside__wrapper">
+                    <h1 class="aside__title">TODO App</h1>
+                    <p class="aside__text">Що бажаєте зробити в майбутньому?</p>
 
-                <form class="aside__form" action="/">
-                    <label data-task-title class="aside__label input">
-                        <input class="aside__input" placeholder="Name">
-                        <p class="popup-auth__warning">Текст повинен містити 1-20 символів</p>
-                    </label>
-                    <!-- <div class="aside__form-wrapper">
-                        <label class="aside__label input">
-                            <input class="aside__input" type="date" placeholder="Deadline"/>
+                    <form class="aside__form" action="/">
+                        <label data-task-title class="aside__label input">
+                            <input class="aside__input" placeholder="Name">
+                            <p data-warning class="popup-auth__warning"></p>
                         </label>
-                        <button data-date class="aside__button-date"></button>
-                    </div> -->
-                    <label data-task-desk class="aside__label input">
-                        <textarea class="aside__textarea" placeholder="Description"></textarea>
-                        <p class="popup-auth__warning">Текст повинен містити 1-200 символів</p>
-                    </label>
-                    <button data-task-send class="aside__button send">Send</button>
-                </form>
+                        <div class="aside__form-wrapper">
+                            <label data-burger-link="2" data-one-open data-date-input class="aside__label input">
+                                <input class="aside__input" type="date" placeholder=""/>
+                                <p data-warning class="popup-auth__warning"></p>
+                            </label>
+                            <button data-burger-link="2" data-date class="aside__button-date active">
+                                <svg style="width: 24px; height: 24px;">
+                                    <use xlink:href="./images/date.svg#date"></use>
+                                </svg>
+                            </button>
+                        </div>
+                        <label data-task-desk class="aside__label input">
+                            <textarea class="aside__textarea" placeholder="Description"></textarea>
+                            <p data-warning class="popup-auth__warning"></p>
+                        </label>
+                        <button data-task-send class="aside__button send">Send</button>
+                    </form>
+                </div>
 
-                <button data-popup-link="1" class="aside__settings">
-                    <svg style="width: 24px; height: 24px;">
-                        <use xlink:href="./images/settings.svg#settings"></use>
-                    </svg>
-                    <span>Settings</span>
-                </button>
             </aside>
+            <div data-popup="5" class="popup-logout">
+                <div data-shadow class="popup-shadow"></div>
+                <div class="logout">
+                    <button data-close class="logout__close">&#x2716;</button>
+                    <button data-logout class="logout__button">
+                        <svg style="width: 24px; height: 24px;">
+                            <use xlink:href="./images/logout.svg#logout"></use>
+                        </svg>
+                        <span>Вийти</span>
+                    </button>
+                </div>
+            </div>
+            <div class="empty"></div>
+            <button data-popup-link="1" class="aside__settings">
+                <svg style="width: 24px; height: 24px;">
+                    <use xlink:href="./images/settings.svg#settings"></use>
+                </svg>
+                <span>Settings</span>
+            </button>
             <div class="content">
                 <div data-task-list class="content__blocks"></div>
             </div>
@@ -107,7 +129,7 @@
             <form class="popup-auth__form" action="#">
                 <label data-login-email class="popup-auth__label input">
                     <input class="popup-auth__input" autocomplete="off" type="email" placeholder="Email"/>
-                    <p class="popup-auth__warning">Електронна пошта введена не вірно</p>
+                    <p data-warning class="popup-auth__warning"></p>
                 </label>
                 <label data-login-pass class="popup-auth__label input">
                     <div data-eye class="popup-auth__eye">
@@ -123,7 +145,7 @@
                         </button>
                     </div>
                     <input data-input-pass class="popup-auth__input" autocomplete="off" type="password" placeholder="Password"/>
-                    <p class="popup-auth__warning">Пароль має містити великі літери цифри і 8 символів</p>
+                    <p data-warning class="popup-auth__warning"></p>
                 </label>
 
                 <button data-login-google class="popup-auth__google google">
@@ -148,16 +170,17 @@
 
             <form class="popup-auth__form">
                 <label data-reg-name class="popup-auth__label input">
-                    <input class="popup-auth__input" autocomplete="off" placeholder="Name">
-                    <p class="popup-auth__warning">Введіть коректно ваше ім'я</p>
+                    <input class="popup-auth__input" autocomplete="off">
+                    <p data-warning class="popup-auth__warning"></p>
+                    <h4 data-placeholder class="popup-auth__placeholder placeholder">Name</h4>
                 </label>
                 <label data-reg-first class="popup-auth__label input">
                     <input class="popup-auth__input" autocomplete="off" placeholder="Last name">
-                    <p class="popup-auth__warning">Введіть коректно ваше прізвище</p>
+                    <p data-warning class="popup-auth__warning"></p>
                 </label>
                 <label data-reg-email class="popup-auth__label input">
                     <input class="popup-auth__input" autocomplete="off" type="email" placeholder="Last name">
-                    <p class="popup-auth__warning">Електронна пошта введена не вірно</p>
+                    <p data-warning class="popup-auth__warning"></p>
                 </label>
                 <label data-reg-pass class="popup-auth__label input">
                     <div data-eye class="popup-auth__eye">
@@ -173,7 +196,7 @@
                         </button>
                     </div>
                     <input class="popup-auth__input" autocomplete="off" type="password" placeholder="Password">
-                    <p class="popup-auth__warning">Пароль має містити великі літери цифри і 8 символів</p>
+                    <p data-warning class="popup-auth__warning"></p>
                 </label>
                 <label data-reg-repeat class="popup-auth__label input">
                     <div data-eye class="popup-auth__eye">
@@ -189,7 +212,7 @@
                         </button>
                     </div>
                     <input class="popup-auth__input" autocomplete="off" type="password" placeholder="Repeat password">
-                    <p class="popup-auth__warning">Паролі не збігаються</p>
+                    <p data-warning class="popup-auth__warning"></p>
                 </label>
                 <button data-reg-submit class="popup-auth__submit send">Submit</button>
             </form>
@@ -197,8 +220,85 @@
             <button data-popup-link="2" class="popup-auth__bottom-btn">Я вже зареєстрований</button>
         </div>
     </div>
-    <div class="popup-complete"></div>
-    <div class="popup-delete"></div>
+    <div data-burger="2" class="popup-date">
+        <div data-shadow class="popup-shadow"></div>
+        <div data-calendar class="aside__calendar">
+            <h3 class="aside__calendar-title">Календар</h3>
+            <button data-close class="aside__calendar-close">&#x2716;</button>
+            <div class="aside__calendar-header">
+                <p data-calendar-date class="aside__calendar-date"></p>
+                <div data-calendar-nav class="aside__calendar-nav">
+                    <button data-calendar-prev class="aside__calendar-prev"><</button>
+                    <button data-calendar-next class="aside__calendar-next">></button>
+                </div>
+            </div>
+            <div class="aside__calendar-body">
+                <ul data-calendar-days class="aside__calendar-days">
+                    
+                </ul>
+                <ul class="aside__calendar-weekday">
+                    <li>Пн</li>
+                    <li>Вт</li>
+                    <li>Ср</li>
+                    <li>Чт</li>
+                    <li>Пт</li>
+                    <li>Сб</li>
+                    <li>Нд</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div data-popup="6" class="popup-delete">
+        <div data-shadow class="popup-shadow"></div>
+        <div class="popup-delete__modal">
+            <button data-close class="popup-delete__close">&#x2716;</button>
+            <h3 class="popup-delete__title">Ви дійсно хочете видалити це завдання?</h3>
+            <div data-delete class="popup-delete__buttons">
+                <button data-false class="popup-delete__btn false">Відміна</button>
+                <button data-true class="popup-delete__btn true">Видалити</button>
+            </div>
+        </div>
+    </div>
+
+    <div data-popup="7" class="popup-delete">
+        <div data-shadow class="popup-shadow"></div>
+        <div class="popup-delete__modal">
+            <button data-close class="popup-delete__close">&#x2716;</button>
+            <h3 class="popup-delete__title">Ви дійсно хочете вийти з акаунта</h3>
+            <div data-logout-buttons class="popup-delete__buttons">
+                <button data-false class="popup-delete__btn false">Відміна</button>
+                <button data-true class="popup-delete__btn true">Вийти</button>
+            </div>
+        </div>
+    </div>
+
+    <div data-alert="1" data-timer class="alert">
+        <h3 class="alert__modal-title">
+            <svg style="width: 24px; height: 24px;">
+                <use xlink:href="./images/complete.svg#complete"></use>
+            </svg>
+            <span>Завдання виконано</span>
+        </h3>
+    </div>
+    <div data-alert="2" data-timer class="alert">
+        <h3 class="alert__modal-title delete">
+            <svg style="width: 24px; height: 24px;">
+                <use xlink:href="./images/trash.svg#trash"></use>
+            </svg>
+            <span>Завдання видалено</span>
+        </h3>
+    </div>
+    <div data-alert="3" data-timer class="alert">
+        <h3 class="alert__modal-title">
+            <span>Ви успішно вийшли з акаунта</span>
+        </h3>
+    </div>
+    <div data-alert="4" data-timer class="alert">
+        <h3 class="alert__modal-title delete">
+            <span>Упс невідома помилка</span>
+        </h3>
+    </div>
 
     <!-- <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script> -->
     <!-- <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script> -->

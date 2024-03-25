@@ -1,4 +1,6 @@
+import { alerts } from "../../assets/alerts.js"
 import { updateTask } from "../../services/tasks/update.js"
+import { openAlert } from "../../utils/alert.js"
 import { getTask } from "./getTask/getTask.js"
 
 const list = document.querySelector("[data-task-list]")
@@ -12,6 +14,7 @@ if(list) {
 
             if(status) {
                 getTask()
+                openAlert(alerts['complete'])
             }
         }
     })

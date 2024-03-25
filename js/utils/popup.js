@@ -10,7 +10,7 @@ if(popupLinks.length) {
             allClose()
 
             currentLink = e.currentTarget;
-            
+
             const popup = currentPopup(currentLink, popups)
             linkHandler(currentLink, popup)
         })
@@ -31,6 +31,30 @@ if(popups.length) {
             }
         })
     })
+}
+
+export function openPopup(id) {
+    let currentPopup;
+    let currentLink;
+
+    popups.forEach(element => {
+        if(element.dataset.popup.toString() == id.toString())
+            currentPopup = element
+    })
+
+    popupLinks.forEach(element => {
+        if(element.dataset.popupLink.toString() == id.toString())
+            currentLink = element
+    })
+
+    if(currentPopup) {
+        allClose()
+        
+        if(currentLink)currentLink.classList.add("active")
+        currentPopup.classList.add('active')
+    }
+
+    return {link: currentLink, popup:  currentPopup}
 }
 
 function linkHandler(target, popup) {
@@ -56,8 +80,10 @@ function currentPopup(target, popups) {
 }
 
 function closePopup(popup) {
-    popup.classList.remove("active")
-    currentLink.classList.remove("active")
+    if(popup) {
+        popup.classList.remove("active")
+        if(currentLink) currentLink.classList.remove("active")
+    }
 }
 
 export function allClose() {
