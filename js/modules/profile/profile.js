@@ -5,6 +5,9 @@ import {getTask} from "../task/getTask/getTask.js"
 const noAuth = document.querySelector("[data-no-auth]")
 const isAuth = document.querySelector("[data-auth]")
 
+const createTask = document.querySelector("[data-create-task]")
+const authTask = document.querySelector("[data-auth-task]")
+
 document.addEventListener("DOMContentLoaded", e => {
     getUserGoogle()
 })
@@ -25,15 +28,22 @@ export function getUserGoogle(option = options) {
     })
 }
 
+
 function authHandler(user) {
      if(user) {
         noAuth.classList.remove("no-auth")
         isAuth.classList.add("active")
 
+        authTask.classList.remove("active")
+        createTask.classList.add("active")
+
         getAva(user)
     } else {
         isAuth.classList.remove("active")
         noAuth.classList.add("no-auth")
+
+        createTask.classList.remove("active")
+        authTask.classList.add("active")
     }
 }
 

@@ -153,11 +153,69 @@ body {
     opacity: 0;
     pointer-events: none;
     transition: opacity .3s;
+    height: 100%;
 }
 
 .aside.active .aside__wrapper {
     opacity: 1;
     pointer-events: all;
+}
+
+.aside__aside-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.aside__create-task {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s;
+}
+.aside__create-task.active {
+    pointer-events: all;
+    opacity: 1;
+}
+
+.aside__auth-task {
+    position: absolute;
+    top: 25%;
+    left: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .3s;
+}
+@media(max-height: 530px) {
+    .aside__auth-task {
+        top: 0
+    }
+}
+.aside__auth-task.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.aside__auth-task-title {
+    font-size: 20px;
+    text-align: center;
+    font-weight: 500;
+    color: var(--color-title);
+    margin-bottom: 16px;
+}
+
+.aside__auth-task-text {
+    text-align: center;
+    color: var(--color-text);
+    margin-bottom: 16px;
 }
 
 .aside__user {
@@ -170,6 +228,7 @@ body {
     align-items: center;
     transform: translateY(-60px);
     transition: transform .3s;
+    z-index: 5;
 }
 .aside.active .aside__user {
     transform: translateY(0);

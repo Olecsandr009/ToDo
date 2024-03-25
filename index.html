@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/images/logo/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Short+Stack&display=swap" rel="stylesheet">
@@ -33,31 +34,45 @@
                 </button>
 
                 <div class="aside__wrapper">
-                    <h1 class="aside__title">TODO App</h1>
-                    <p class="aside__text">Що бажаєте зробити в майбутньому?</p>
+                    
+                        <h1 class="aside__title">TODO App</h1>
+                        <p class="aside__text">Що бажаєте зробити в майбутньому?</p>
 
-                    <form class="aside__form" action="/">
-                        <label data-task-title class="aside__label input">
-                            <input class="aside__input" placeholder="Name">
-                            <p data-warning class="popup-auth__warning"></p>
-                        </label>
-                        <div class="aside__form-wrapper">
-                            <label data-burger-link="2" data-one-open data-date-input class="aside__label input">
-                                <input class="aside__input" type="date" placeholder=""/>
-                                <p data-warning class="popup-auth__warning"></p>
-                            </label>
-                            <button data-burger-link="2" data-date class="aside__button-date active">
-                                <svg style="width: 24px; height: 24px;">
-                                    <use xlink:href="./images/date.svg#date"></use>
-                                </svg>
-                            </button>
+                        <div class="aside__aside-content">
+                            <div data-create-task class="aside__create-task">
+                                <form class="aside__form" action="/">
+                                    <label data-task-title class="aside__label input">
+                                        <input class="aside__input" placeholder="Name">
+                                        <p data-warning class="popup-auth__warning"></p>
+                                    </label>
+                                    <div class="aside__form-wrapper">
+                                        <label data-burger-link="2" data-one-open data-date-input class="aside__label input">
+                                            <input class="aside__input" type="date" placeholder=""/>
+                                            <p data-warning class="popup-auth__warning"></p>
+                                        </label>
+                                        <button data-burger-link="2" data-date class="aside__button-date active">
+                                            <svg style="width: 24px; height: 24px;">
+                                                <use xlink:href="./images/date.svg#date"></use>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <label data-task-desk class="aside__label input">
+                                        <textarea class="aside__textarea" placeholder="Description"></textarea>
+                                        <p data-warning class="popup-auth__warning"></p>
+                                    </label>
+                                    <button data-task-send class="aside__button send">Send</button>
+                                </form>
+                            </div>
+                            <div data-auth-task class="aside__auth-task">
+                                <h3 class="aside__auth-task-title">
+                                    Нажаль ви не авторизовані
+                                </h3>
+                                <p class="aside__auth-task-text">
+                                    Будь ласка, авторизуйтеся для подальшого користуванням сайтом
+                                </p>
+                                <button data-popup-link="2" class="aside__auth-task-send send">Авторизація</button>
+                            </div>
                         </div>
-                        <label data-task-desk class="aside__label input">
-                            <textarea class="aside__textarea" placeholder="Description"></textarea>
-                            <p data-warning class="popup-auth__warning"></p>
-                        </label>
-                        <button data-task-send class="aside__button send">Send</button>
-                    </form>
                 </div>
 
             </aside>

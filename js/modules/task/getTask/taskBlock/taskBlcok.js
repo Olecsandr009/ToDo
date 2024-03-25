@@ -26,7 +26,9 @@ export function taskBlock(task, id) {
             <h3 class="content__block-title">${task.title}</h3>
             <p class="content__block-text">${task.text}</p>
             <p class="content__block-deadline">${validDeadline}</p>
-            <button data-task-complete class="content__block-complete-btn send">Complete</button>
+            <button ${task.complete?"data-task-del":"data-task-complete"} class="content__block-complete-btn send">
+                ${task.complete?"Видалити":"Виконати"}
+            </button>
         </div>
     `
 }
