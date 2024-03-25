@@ -1,15 +1,11 @@
-import { json } from "../../../utils/json.js"
 import {item} from "./item/item.js"
+import { colors } from "../../../assets/theme.js"
 
 const theme = document.querySelector("[data-theme]")
 const root = document.documentElement
 
-let colors
-
 document.addEventListener("DOMContentLoaded", async e => {
     try {
-        colors = await json("../../../json/colors.json")
-        
         colorList(colors)
         
         setTheme(colors, colors[0]["--color-secondary"])

@@ -43,6 +43,7 @@ if(send) {
         if(onTitle(data.title, title) && 
            onTextarea(data.text, desk) && 
            onDeadline(data.deadline, date)) {
+            data.created = new Date()
             const status = await setTask(data)
             
             if(status) {

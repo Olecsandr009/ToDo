@@ -2,21 +2,15 @@ import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} fro
 import {} from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js'
 import { db } from '../../assets/firebaseConf.js'
 
-const auth = getAuth()
+export async function login(email, password) {
+    try {
+        const auth = getAuth()
 
-// createUserWithEmailAndPassword(auth, "sasha2005vit@gmail.com", "bibaboba1234")
-//     .then(userCredentials => {
-//         const user = userCredentials.user
-//         console.log(user)
-//     }).catch(error => {
-//         console.log(error)
-//     })
+        const result = await signInWithEmailAndPassword(auth, email, password)
+        const user = result.user;
 
-
-// signInWithEmailAndPassword(auth, "sasha2005vit@gmail.com", "bibaboba1234")
-//     .then(userCredentials => {
-//         const user = userCredentials.user
-//         console.log(user)
-//     }).catch(error => {
-//         console.log(error.code, error.message)
-//     })
+        return {status: true, errorCode: undefined}
+    } catch(error) {
+        return {status: false, errorCode: error.code}
+    }
+}

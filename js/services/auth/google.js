@@ -26,15 +26,14 @@ export function authGoogle() {
                     ava: user.photoURL
                 })
             }
-                    
-            // profileGoogle()
+                
+            console.log("user google auth success")
         }).catch(error => {
             const errorCode = error.code;
             const errorMessage = error.message;
             
             const credential = GoogleAuthProvider.credentialFromError(error)
 
-            console.log(errorCode, errorMessage)
         })
 }
 

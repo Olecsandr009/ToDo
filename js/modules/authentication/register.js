@@ -1,4 +1,9 @@
-import { onEmail, onPassword, onRepeat, onText } from "../../utils/validate.js"
+import { onEmail, onError, onPassword, onRepeat, onText } from "../../utils/validate.js"
+import { register } from "../../services/auth/register.js"
+import { authError } from "../../assets/auth.js"
+import { closeBurgers } from "../../utils/burger.js"
+import { allClose } from "../../utils/popup.js"
+import { usePlaceholder } from "../../utils/placeholder.js"
 
 const name = document.querySelector("[data-reg-name]")
 const firstName = document.querySelector("[data-reg-first]")
@@ -9,7 +14,7 @@ const repeat = document.querySelector("[data-reg-repeat]")
 const submit = document.querySelector("[data-reg-submit]")
 
 if(submit) {
-    submit.addEventListener("click", e => {
+    submit.addEventListener("click", async e => {
         e.preventDefault()
 
         let nameValue = ""
@@ -40,16 +45,30 @@ if(submit) {
         else repeat.classList.remove("warning")
 
         if(
-            onText(nameValue) &&
-            onText(firstValue) &&
-            onEmail(emailValue) &&
-            onPassword(passwordValue) &&
-            
-            passwordValue.toString() == repeatValue.toString()
+            onText(nameValue, name) &&
+            onText(firstValue, firstName) &&
+            onEmail(emailValue, email) &&
+            onPassword(passwordValue, password) &&
+            onRepeat(passwordValue, repeatValue, repeat)
         ) {
 
+            const {status, errorCode} = await register(emailValue, passwordValue, nameValue, firstValue)
 
-            
+            if(!status && errorCode == authError["emailAlready"]) {
+                email.classList.add("warning")
+                onError(email, "emailAlready")
+            } else {
+                closeBurgers()
+                allClose()
+
+                name.querySelector("input").value = ""
+                firstName.querySelector('input').value = ""
+                email.querySelector("input").value = ""
+                password.querySelector("input").value = ""
+                repeat.querySelector("input").value = ""
+
+                usePlaceholder()
+            }
         }
  
     })

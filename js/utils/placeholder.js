@@ -13,3 +13,17 @@ if(placeholder.length) {
         })
     })
 }
+
+export function usePlaceholder() {
+    if(placeholder.length) {
+        placeholder.forEach(element => {
+            const currentInput = element.parentElement.querySelector("input")
+
+            if(currentInput.value.length > 0) {
+                element.classList.add("value")
+            } else {
+                element.classList.remove("value")
+            }
+        })
+    }
+}

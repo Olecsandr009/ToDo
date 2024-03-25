@@ -136,3 +136,11 @@ export function onDeadline(date, element) {
 
     return true
 }
+
+export function onError(element, error) {
+    if(element) {
+        const currentElement = element.querySelector("[data-warning]")
+
+        getWarning(currentElement, error)
+    }
+}
