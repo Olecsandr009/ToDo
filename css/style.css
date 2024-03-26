@@ -13,6 +13,7 @@ input:-webkit-autofill {
     box-shadow: 0px 0px 0px 50px var(--color-primary) inset; 
     -webkit-text-fill-color: var(--color-input-text) !important; /* цвет текста */
     color: var(--color-input-text) !important; /* цвет текста */
+    transition: box-shadow .5s;
 }
 
 
@@ -57,6 +58,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;
 }
 
+
+input[value=""]::-webkit-datetime-edit{ color: transparent; }
+input:focus::-webkit-datetime-edit{ color: #000; }
+
+input:focus::-webkit-datetime-edit {
+   color: rgba(255, 255, 255, .46) !important; 
+}
+
 input[type="date"][value=""] {
     user-select: none;
 }
@@ -75,6 +84,7 @@ body {
     overflow: hidden;
 
     background-color: var(--color-background);
+    transition: background-color .5s;
 }
 
   /* .short-stack-regular {
@@ -139,7 +149,7 @@ body {
     left: 0;
     height: 100%;
     transform: translateX(-75%);    
-    transition: border-right .5s, transform .3s;
+    transition: border-right .5s, transform .3s, background-color .5s;
 }
 
 .aside.active {
@@ -226,7 +236,7 @@ body {
     height: 50px;
     display: flex;
     align-items: center;
-    transform: translateY(-60px);
+    transform: translateY(-75px);
     transition: transform .3s;
     z-index: 5;
 }
@@ -402,6 +412,7 @@ body {
 }
 .aside__button-date svg {
     fill: var(--color-secondary);
+    transition: fill .5s;
 }
 
 .aside__label {}
@@ -419,8 +430,13 @@ body {
     bottom: 20px;
     left: 15px;
     z-index: 5;
+    overflow: hidden;
+    width: 70px;
+    height: 70px;
 }
 .aside.active ~ .aside__settings {
+    width: 160px;
+    height: 40px;
 }
 .aside__settings span {
     opacity: 0;
@@ -439,6 +455,7 @@ body {
     fill: var(--color-text);
     transform: scale(2.8);
     transition: transform .3s, font-size .3s;
+    flex: 0 0 auto;
 }
 .aside__settings:hover svg {
     transform: rotate(90deg) scale(2.8);
@@ -484,6 +501,17 @@ body {
     border-radius: 8px;
     position: relative;
     max-width: 330px;
+    transition: background-color .5s;
+    /* animation: start 3s; */
+}
+
+@keyframes start {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1
+    }
 }
 
 .content__block:hover {
@@ -497,8 +525,9 @@ body {
     left: -2px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 8px;
+    z-index: 2;
 }
 
 .content__block:hover .content__block-close {
@@ -550,7 +579,8 @@ body {
     height: 20px;
     bottom: 0;
     left: 0;
-    background: linear-gradient(0deg, var(--color-primary) 0%, rgba(253,187,45,0) 100%)
+    background: linear-gradient(0deg, var(--color-primary) 0%, rgba(253,187,45,0) 100%);
+    transition: background .5s
 }
 
 .content__block-deadline {
@@ -565,7 +595,7 @@ body {
     color: var(--color-title);
     font-size: 18px;
     box-shadow: 0.1em 0.1em 0em var(--color-secondary);
-    transition: box-shadow .5s;
+    transition: box-shadow .5s, background-color .5s;
 }
 
 /*==-------------- Footer --------------==*/
@@ -577,8 +607,8 @@ body {
 .input {
     width: 100%;
     border: 2px solid var(--color-text);
-    padding: 14px 10px;
     border-radius: 8px;
+    overflow: hidden;
     position: relative;
     transition: border-color .3s, padding .3s;
     display: block;
@@ -600,11 +630,12 @@ body {
     font-size: 14px;
     opacity: 0;
     pointer-events: none;
-    transition: opacity .3s;
+    transition: opacity .3s, color .5s;
 }
 
 .input input,
 .input textarea {
+    padding: 14px 10px;
     width: 100%;
     border: none;
     background-color: transparent;
@@ -612,6 +643,19 @@ body {
     outline: none;
     caret-color: var(--color-secondary);
     transition: caret-color .5s;
+}
+
+.input.date::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    top: 0;
+    right: 0;
+    width: 50px;
+    background-color: var(--color-primary);
+    pointer-events: none;
+    z-index: 2;
+    transition: background-color .5s;
 }
 
 .input textarea {
@@ -694,6 +738,7 @@ body {
     padding: 14px 10px;
     border: none;
     border-radius: 8px;
+    font-size: 18px;
     background-color: transparent;
     color: var(--color-text);
     border: 2px solid var(--color-secondary);
@@ -705,7 +750,7 @@ body {
 .send:hover {
     background-color: var(--color-secondary);
     color: var(--color-primary);
-    transition: background-color .5s;
+    transition: background-color .5s, color .5s;
 }
 
 .send:active {
@@ -721,10 +766,13 @@ body {
     border: 2px solid var(--color-secondary);
     opacity: .8;
     cursor: pointer;
-    transition: opacity .3s;
+    transition: opacity .3s, color .5s;
 }
 .true:hover {
     opacity: 1;
+}
+.true:disabled {
+    opacity: .6;
 }
 
 .false {
@@ -741,6 +789,14 @@ body {
 .false:hover {
     background-color: var(--color-text);
     color: var(--color-primary);
+}
+.false:disabled {
+    opacity: .6;
+}
+
+.false:disabled:hover {
+    background-color: transparent;
+    color: var(--color-text);
 }
 
 /*==------- Google -------==*/
@@ -787,6 +843,25 @@ body {
     width: 35px;
     height: 35px;
     background-color: var(--color-complete);
+    color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: width .3s, color .3s;
+    user-select: none;
+    cursor: pointer;
+}
+
+.complete:hover,
+.term:hover {
+    width: 100px;
+    color: var(--color-primary);
+    transition: .5s;
+}
+
+.complete:hover {
+    color: var(--color-primary);
+    transition: .5s;
 }
 
 .complete {
@@ -805,18 +880,16 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    opacity: 0;
     pointer-events: none;
-    transition: opacity .3s;
     z-index: 100;
 }
 .popup-settings.active {
-    opacity: 1;
     pointer-events: all;
 }
 
 .popup-settings.active .popup-settings__modal {
     transform: translate(-50%, -50%);
+    opacity: 1;
 }
 
 .popup-shadow {
@@ -825,8 +898,12 @@ body {
     height: 100%;
     background-color: var(--color-background);
     backdrop-filter: blur(4px);
-    opacity: .5;
+    opacity: 0;
     z-index: 3;
+    transition: opacity .3s;
+}
+.popup-settings.active .popup-shadow {
+    opacity: .5;
 }
 
 .popup-settings .popup-settings__modal {
@@ -840,8 +917,12 @@ body {
     border-radius: 8px;
     display: flex;
     overflow: hidden;
-    transition: opacity .3s, transform .3s;
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: 0em 0.4em 0.1em var(--color-secondary);
+    transition: opacity .3s, transform .3s, background-color .5s, box-shadow .5s;
     z-index: 100;
+    transition: opacity .5s;
 }
 
 .popup-settings__close {
@@ -863,6 +944,7 @@ body {
     flex: 0 0 25%;
     background-color: var(--color-primary);
     padding: 20px;
+    transition: background-color .5s;
 }
 .popup-settings__title {
     font-weight: 600;
@@ -872,9 +954,11 @@ body {
     color: var(--color-text);
     gap: 8px;
     margin-bottom: 16px;
+    transition: color .5s;
 }
 .popup-settings__title svg {
     fill: var(--color-text);
+    transition: fill .5s;
 }
 .popup-settings__list {
     display: flex;
@@ -925,16 +1009,19 @@ body {
 
 /*==------- theme -------==*/
 
+
 .theme__title {
     font-size: 40px;
     font-weight: 500;
     color: var(--color-text);
     margin-bottom: 16px;
+    transition: color .5s;
 }
 .theme__point-title {
     color: var(--color-text);
     font-size: 22px;
     margin-bottom: 8px;
+    transition: color .5s;
 }
 .theme__list {
     display: flex;
@@ -962,9 +1049,18 @@ body {
     transform: translate(-50%, -50%);
     border-radius: 50%;
     opacity: 0;
-    transition: opacity .3s;
+    transition: opacity .3s, border .5s;
 }
 .theme__btn.active {}
+
+.theme__buttons {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+}
 
 /*==-------------- Popup Auth --------------==*/
 
@@ -975,12 +1071,9 @@ body {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    opacity: 0;
-    transition: opacity .3s;
 }
 .popup-auth.active {
     pointer-events: all;
-    opacity: 1;
 }
 .popup-auth.active .popup-shadow {
     opacity: .5;
@@ -1006,11 +1099,13 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    box-shadow: 0em 0.4em 0.1em var(--color-secondary);
     border-radius: 8px;
     z-index: 100;
 }
 .popup-auth__close {
     position: absolute;
+    cursor: pointer;
     top: 20px;
     right: 20px;
     width: 20px;
@@ -1112,12 +1207,9 @@ body {
     top: 0;
     left: 0;
     pointer-events: none;
-    opacity: 0;
-    transition: opacity .3s;
 }
 .popup-date.active {
     pointer-events: all;
-    opacity: 1;
 }
 .popup-date.active .popup-shadow {
     opacity: .5;
@@ -1230,12 +1322,9 @@ body {
     height: 100%;
     top: 0;
     left: 0;
-    opacity: 0;
     pointer-events: none;
-    transition: opacity .3s;
 }
 .popup-logout.active {
-    opacity: 1;
     pointer-events: all;
 }
 .popup-logout.active .popup-shadow {
@@ -1300,13 +1389,10 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0;
     pointer-events: none;
-    transition: opacity .3s;
     z-index: 10;
 }   
 .popup-delete.active {
-    opacity: 1;
     pointer-events: all;
 }
 .popup-delete.active .popup-shadow {
@@ -1323,12 +1409,15 @@ body {
     padding-right: 32px;
     pointer-events: none;
     z-index: 100;
+    opacity: 0;
+    box-shadow: 0em 0.4em 0.1em var(--color-secondary);
     transform: translate(-50%, 100%);
-    transition: transform .3s;
+    transition: transform .3s, opacity .3s;
 }
 .popup-delete.active .popup-delete__modal {
     transform: translate(-50%, -50%);
     pointer-events: all;
+    opacity: 1;
 }
 
 .popup-delete__close {

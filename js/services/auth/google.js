@@ -1,6 +1,7 @@
 import {getAuth, signInWithPopup, GoogleAuthProvider, EmailAuthProvider} from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js'
 import {addDoc, collection, query, getDocs, where} from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js'
 import { db } from '../../assets/firebaseConf.js'
+import { setSettings, settingsExists } from '../settings/setSettings.js'
 
 const provider = new GoogleAuthProvider()
 const auth = getAuth()
@@ -26,8 +27,13 @@ export function authGoogle() {
                     ava: user.photoURL
                 })
             }
+
+            if(!await settingsExists(user.uid)) {
+                await setSettings({
+                    theme: "red"
+                })
+            }
                 
-            console.log("user google auth success")
         }).catch(error => {
             const errorCode = error.code;
             const errorMessage = error.message;

@@ -7,7 +7,7 @@ export function taskBlock(task, id) {
     const deadline = new Date(task.deadline.seconds * 1000).toString().split(" ")
 
     const date = new Date()
-    const year = date.getFullYear(deadline[3])
+    const year = deadline[3]
     const day = deadline[2]
 
     const validDeadline = day + ":" + (months.indexOf(deadline[1]) + 1) + ":" + year
@@ -19,8 +19,8 @@ export function taskBlock(task, id) {
             <button data-task-del class="content__block-close">&#x2716;</button>
 
             <div class="content__flags">
-                ${task.complete?`<span class="complete"></span>`:""}
-                ${dayLength < 6? `<span class="term"></span>`:""}
+                ${task.complete?`<span class="complete">Виконане</span>`:""}
+                ${dayLength < 6? `<span class="term">Термінове</span>`:""}
             </div>
 
             <h3 class="content__block-title">${task.title}</h3>

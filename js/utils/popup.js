@@ -1,3 +1,5 @@
+import { usePlaceholder } from "./placeholder.js";
+
 const popups = document.querySelectorAll("[data-popup]")
 const popupLinks = document.querySelectorAll("[data-popup-link]")
 
@@ -104,6 +106,7 @@ function clearInputs(popup) {
     if(inputs) {
         inputs.forEach(element => {
             element.value = ""
+            usePlaceholder()
 
             element.parentElement.classList.remove("warning")
         })

@@ -4,6 +4,7 @@ import { googleSingOut } from "../../services/auth/logout.js"
 import { openAlert } from "../../utils/alert.js"
 import { allClose, openPopup } from "../../utils/popup.js"
 import { getUserGoogle } from "../profile/profile.js"
+import { closeBurgers } from "../../utils/burger.js"
 
 const logout = document.querySelector("[data-logout]")
 const logoutBtn = document.querySelector("[data-logout-buttons]")
@@ -13,6 +14,7 @@ if(logout) {
         e.preventDefault()
 
         allClose()
+        closeBurgers()
         openPopup(popups['logout'])
     })
 }
@@ -25,6 +27,7 @@ if(logoutBtn) {
         if(e.target.closest("[data-false]")) {
             status = false
             allClose()
+            closeBurgers()
         }
 
         if(e.target.closest("[data-true]")) {
@@ -33,6 +36,7 @@ if(logoutBtn) {
 
         if(status) {
             allClose()
+            closeBurgers()
             openAlert(alerts["logout"])
             getUserGoogle()
         }

@@ -1,7 +1,7 @@
 import { getWarning } from "./warning.js"
 
 export function onPassword(text, password, login = false) {
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d.,?:'"~!@#$%^&*()_?\-`=+]{8,}$/
 
     if(password) {
         const currentElement = password.querySelector("[data-warning]")
@@ -98,7 +98,7 @@ export function onTitle(text, element) {
 }
 
 export function onTextarea(text, element) {
-    const regex = /^.{1,200}$/
+    const regex = /^[\s\S]{1,200}$/
 
     if(element) {
         const currentElement = element.querySelector("[data-warning]")

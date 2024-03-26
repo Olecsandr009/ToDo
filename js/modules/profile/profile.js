@@ -1,6 +1,8 @@
 import {getAuth} from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js'
 import { allClose } from '../../utils/popup.js'
 import {getTask} from "../task/getTask/getTask.js"
+import { getUserData } from '../../services/auth/profile.js'
+import { selectTheme } from '../settings/theme/theme.js'
 
 const noAuth = document.querySelector("[data-no-auth]")
 const isAuth = document.querySelector("[data-auth]")
@@ -20,6 +22,7 @@ export function getUserGoogle(option = options) {
     const auth = getAuth()
     auth.onAuthStateChanged(user => {
         authHandler(user)
+        selectTheme()
         getTask()
 
         if(user && option.popupClose) {
@@ -50,5 +53,6 @@ function authHandler(user) {
 function getAva(user) {
     const image = isAuth.querySelector("img")
 
-    if(image) image.src = user.photoURL  
+    if(image && user.photoURL) image.src = user.photoURL
+    else image.src = "./images/avatar.png"
 }

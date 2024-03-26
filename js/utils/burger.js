@@ -16,10 +16,11 @@ if(links.length) {
 
             if(currentBurger) {
                 if(
-                    link.classList.contains("active") &&
                     link.classList.contains("close-all")
                 ) {
+                    console.log("close")
                     allClose()
+                    closeBurgers()
                 }
 
                 if(openState(link)) {
@@ -41,6 +42,10 @@ if(burgers.length) {
             e.preventDefault()
 
             if(e.target.closest("[data-shadow")) {
+                closeBurgers()
+            }
+
+            if(e.target.closest("[data-close]")) {
                 closeBurgers()
             }
         })

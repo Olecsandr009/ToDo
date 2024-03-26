@@ -22,61 +22,60 @@
                         </svg>
                     </button>
                     <div data-auth class="aside__result-user">
-                        <button data-popup-link="5" class="aside__result-user-btn">
+                        <button data-burger-link="3" class="aside__result-user-btn">
                             <img src="" alt="Ava">
                         </button>
                     </div>
                 </div>
-                <button data-burger-link="1" data-primary class="aside__burger active toggle">
+                <button data-burger-link="1" data-primary class="aside__burger active toggle close-all">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
 
                 <div class="aside__wrapper">
-                    
-                        <h1 class="aside__title">TODO App</h1>
-                        <p class="aside__text">Що бажаєте зробити в майбутньому?</p>
+                    <h1 class="aside__title">TODO App</h1>
+                    <p class="aside__text">Що бажаєте зробити в майбутньому?</p>
 
-                        <div class="aside__aside-content">
-                            <div data-create-task class="aside__create-task">
-                                <form class="aside__form" action="/">
-                                    <label data-task-title class="aside__label input">
-                                        <input class="aside__input" placeholder="Name">
+                    <div class="aside__aside-content">
+                        <div data-create-task class="aside__create-task">
+                            <form class="aside__form" action="/">
+                                <label data-task-title class="aside__label input">
+                                    <input class="aside__input" placeholder="Назва завдання">
+                                    <p data-warning class="popup-auth__warning"></p>
+                                </label>
+                                <div class="aside__form-wrapper">
+                                    <label data-burger-link="2" data-one-open data-date-input class="aside__label date input">
+                                        <input class="aside__input" type="date" placeholder=""/>
                                         <p data-warning class="popup-auth__warning"></p>
                                     </label>
-                                    <div class="aside__form-wrapper">
-                                        <label data-burger-link="2" data-one-open data-date-input class="aside__label input">
-                                            <input class="aside__input" type="date" placeholder=""/>
-                                            <p data-warning class="popup-auth__warning"></p>
-                                        </label>
-                                        <button data-burger-link="2" data-date class="aside__button-date active">
-                                            <svg style="width: 24px; height: 24px;">
-                                                <use xlink:href="./images/date.svg#date"></use>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <label data-task-desk class="aside__label input">
-                                        <textarea class="aside__textarea" placeholder="Description"></textarea>
-                                        <p data-warning class="popup-auth__warning"></p>
-                                    </label>
-                                    <button data-task-send class="aside__button send">Send</button>
-                                </form>
-                            </div>
-                            <div data-auth-task class="aside__auth-task">
-                                <h3 class="aside__auth-task-title">
-                                    Нажаль ви не авторизовані
-                                </h3>
-                                <p class="aside__auth-task-text">
-                                    Будь ласка, авторизуйтеся для подальшого користуванням сайтом
-                                </p>
-                                <button data-popup-link="2" class="aside__auth-task-send send">Авторизація</button>
-                            </div>
+                                    <button data-burger-link="2" data-date class="aside__button-date active">
+                                        <svg style="width: 24px; height: 24px;">
+                                            <use xlink:href="./images/date.svg#date"></use>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <label data-task-desk class="aside__label input">
+                                    <textarea class="aside__textarea" placeholder="Опис завдання"></textarea>
+                                    <p data-warning class="popup-auth__warning"></p>
+                                </label>
+                                <button data-task-send class="aside__button send">Створити</button>
+                            </form>
                         </div>
+                        <div data-auth-task class="aside__auth-task">
+                            <h3 class="aside__auth-task-title">
+                                Нажаль ви не авторизовані!
+                            </h3>
+                            <p class="aside__auth-task-text">
+                                Будь ласка, авторизуйтеся для подальшого користуванням сайтом.
+                            </p>
+                            <button data-popup-link="2" class="aside__auth-task-send send">Авторизація</button>
+                        </div>
+                    </div>
                 </div>
 
             </aside>
-            <div data-popup="5" class="popup-logout">
+            <div data-burger="3" class="popup-logout">
                 <div data-shadow class="popup-shadow"></div>
                 <div class="logout">
                     <button data-close class="logout__close">&#x2716;</button>
@@ -93,7 +92,7 @@
                 <svg style="width: 24px; height: 24px;">
                     <use xlink:href="./images/settings.svg#settings"></use>
                 </svg>
-                <span>Settings</span>
+                <span>Налаштування</span>
             </button>
             <div class="content">
                 <div data-task-list class="content__blocks"></div>
@@ -112,24 +111,29 @@
                     <svg style="width: 34px; height: 34px;">
                         <use xlink:href="./images/settings.svg#settings"></use>
                     </svg>
-                    <span>Settings</span>
+                    <span>Налаштування</span>
                 </h2>
                 <ul data-tab-list class="popup-settings__list">
                     <li data-tab-link="1" class="popup-settings__item active">
-                        <button class="popup-settings__button">themes</button>
+                        <button class="popup-settings__button">Теми</button>
                     </li>
                 </ul>
             </aside>
             <div class="popup-settings__content">
                 <div data-tab="1" class="popup-settings__block active">
-                    <h2 class="theme__title">THEME</h2>
+                    <h2 class="theme__title">ТЕМИ</h2>
                     
-                    <h3 class="theme__point-title">Select theme</h3>
+                    <h3 class="theme__point-title">Виберіть тему</h3>
                     <ul data-theme class="theme__list">
                         <li class="theme__item">
                             <button class="theme__btn" style="background-color: red;"></button>
                         </li>
                     </ul>
+
+                    <div class="theme__buttons">
+                        <button disabled="true" data-theme-close class="theme__button false">Відміна</button>
+                        <button disabled="true" data-theme-save class="theme__button true">Зберегти</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -139,7 +143,7 @@
         <div class="popup-auth__modal">
             <button data-close class="popup-auth__close">&#x2716;</button>
 
-            <h3 class="popup-auth__title">Login</h3>
+            <h3 class="popup-auth__title">Авторизація</h3>
 
             <form class="popup-auth__form" action="#">
                 <label data-login-email class="popup-auth__label input">
@@ -170,7 +174,7 @@
                     <span>Увійти за допомогою google</span>
                 </button>
 
-                <button data-login-submit class="popup-auth__submit send">Submit</button>
+                <button data-login-submit class="popup-auth__submit send">Авторизуватися</button>
             </form>
                 
 
@@ -183,7 +187,7 @@
         <div class="popup-auth__modal">
             <button data-close class="popup-auth__close">&#x2716;</button>
 
-            <h3 class="popup-auth__title">Registration</h3>
+            <h3 class="popup-auth__title">Реєстрація</h3>
 
             <form class="popup-auth__form">
                 <label data-reg-name class="popup-auth__label input">
@@ -235,7 +239,11 @@
                     <h4 data-placeholder class="popup-auth__placeholder placeholder">Повторіть пароль</h4>
                     <p data-warning class="popup-auth__warning"></p>
                 </label>
-                <button data-reg-submit class="popup-auth__submit send">Submit</button>
+                <button data-login-google class="popup-auth__google google">
+                    <img src="./images/google.png" alt="google" />
+                    <span>Увійти за допомогою google</span>
+                </button>
+                <button data-reg-submit class="popup-auth__submit send">Зареєструватися</button>
             </form>
 
             <button data-popup-link="2" class="popup-auth__bottom-btn">Я вже зареєстрований</button>
@@ -286,7 +294,7 @@
         <div data-shadow class="popup-shadow"></div>
         <div class="popup-delete__modal">
             <button data-close class="popup-delete__close">&#x2716;</button>
-            <h3 class="popup-delete__title">Ви дійсно хочете вийти з акаунта</h3>
+            <h3 class="popup-delete__title">Ви дійсно хочете вийти з акаунта?</h3>
             <div data-logout-buttons class="popup-delete__buttons">
                 <button data-false class="popup-delete__btn false">Відміна</button>
                 <button data-true class="popup-delete__btn true">Вийти</button>
@@ -299,7 +307,7 @@
             <svg style="width: 24px; height: 24px;">
                 <use xlink:href="./images/complete.svg#complete"></use>
             </svg>
-            <span>Завдання виконано</span>
+            <span>Завдання виконано!</span>
         </h3>
     </div>
     <div data-alert="2" data-timer class="alert">
@@ -307,17 +315,17 @@
             <svg style="width: 24px; height: 24px;">
                 <use xlink:href="./images/trash.svg#trash"></use>
             </svg>
-            <span>Завдання видалено</span>
+            <span>Завдання видалено!</span>
         </h3>
     </div>
     <div data-alert="3" data-timer class="alert">
         <h3 class="alert__modal-title">
-            <span>Ви успішно вийшли з акаунта</span>
+            <span>Ви успішно вийшли з акаунта!</span>
         </h3>
     </div>
     <div data-alert="4" data-timer class="alert">
         <h3 class="alert__modal-title delete">
-            <span>Упс невідома помилка</span>
+            <span>Упс невідома помилка!</span>
         </h3>
     </div>
 
