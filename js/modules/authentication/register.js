@@ -41,7 +41,7 @@ if(submit) submit.addEventListener("click", async e => {
             closeBurgers()
             allClose()
 
-            for(const key in elements) clearDataInputs(elements[key])
+            clearDataInputs()
 
             usePlaceholder()
 
@@ -55,13 +55,30 @@ if(submit) submit.addEventListener("click", async e => {
 
 for(const key in elements) lookDataInput(elements[key])
 
-function getDataInputs(object, inputsData) {
+function getInput(element) {
+    return element.querySelector("input")
+}
+
+function getDataInputs(object, elements) {
     const newObject = object;
-    for(key in inputsData) {
-        newObject[key] = inputsData[key] ? inputsData[key]:""
+    for(const key in elements) {
+        newObject[key] = elements[key] ? getInput(elements[key]).value : ""
     }
 
     return newObject
+}
+
+function lookDataInput(element) {
+    if(!element) return
+    getInput(element).addEventListener("input", e => {
+        element.classList.remove("warning")
+    })
+}
+
+function clearDataInputs(elements) {
+    for(const key in elements) {
+        getInput(elements[key]).value = ""
+    }
 }
 
 function isValidValues(element) {
@@ -79,16 +96,4 @@ function isValidValues(element) {
         default:
             return false
     }
-}
-
-function clearDataInputs(element) {
-    if(element) element.querySelector("input").value = ""
-}
-
-function lookDataInput(element) {
-    if(!element) return
-    const input = element.querySelector("input")
-    if(input) input.addEventListener("input", e => {
-        element.classList.remove("warning")
-    })
 }
