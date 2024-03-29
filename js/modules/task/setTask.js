@@ -1,10 +1,11 @@
 import { setTask } from "../../services/tasks/create.js"
-import { onDeadline, onTextarea, onTitle } from "../../utils/validate.js"
 import { getTask } from "./getTask/getTask.js"
 import { allClose } from "../../utils/popup.js"
 import { closeBurgers } from "../../utils/burger.js"
 import { openAlert } from "../../utils/alert.js"
 import { alerts } from "../../assets/alerts.js"
+
+import { onDeadline, onTextArea, onTitle } from "../../utils/validate/validate.js"
 
 const title = document.querySelector("[data-task-title]")
 const desk = document.querySelector("[data-task-desk]")
@@ -31,17 +32,12 @@ if(send) {
         const deadline = new Date(date.querySelector("input").value)
         if(date) data.deadline = deadline
 
-        if(!onTitle(data.title, title)) title.classList.add("warning")
-        else title.classList.remove("warning")
-
-        if(!onTextarea(data.text, desk)) desk.classList.add("warning")
-        else desk.classList.remove("warning")
-
-        if(!onDeadline(data.deadline, date)) date.classList.add("warning")
-        else date.classList.remove("warning")
+        onTitle(data.title, title)
+        onTextArea(data.text, desk)
+        onDeadline(data.deadline, date)
 
         if(onTitle(data.title, title) && 
-           onTextarea(data.text, desk) && 
+           onTextArea(data.text, desk) && 
            onDeadline(data.deadline, date)) {
             data.created = new Date()
             const status = await setTask(data)

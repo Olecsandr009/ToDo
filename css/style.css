@@ -608,7 +608,6 @@ body {
     width: 100%;
     border: 2px solid var(--color-text);
     border-radius: 8px;
-    overflow: hidden;
     position: relative;
     transition: border-color .3s, padding .3s;
     display: block;

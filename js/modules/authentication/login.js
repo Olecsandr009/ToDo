@@ -3,55 +3,53 @@ import { login } from "../../services/auth/login.js"
 import { closeBurgers } from "../../utils/burger.js"
 import { usePlaceholder } from "../../utils/placeholder.js"
 import { allClose } from "../../utils/popup.js"
-import {onEmail, onError, onPassword} from "../../utils/validate.js"
-// import {login} from "../../services/auth/login.js"
+
+import { onEmail, onError, onText } from "../../utils/validate/validate.js"
 
 const email = document.querySelector("[data-login-email]")
 const password = document.querySelector("[data-login-pass]")
-
 const submit = document.querySelector("[data-login-submit]")
 
-if(submit) {
-    submit.addEventListener("click", async e => {
-        e.preventDefault()
+const loginData = {email: "", password: ""}
 
-        let emailValue = "";
-        let passValue = "";
+if(submit) submit.addEventListener("click", async e => {
+    e.preventDefault()
 
-        if(email) emailValue = email.querySelector("input").value
-        if(password) passValue = password.querySelector("input").value
+    // Отримуємо дані input
+    if(email) loginData.email = getInputValue(email)
+    if(password) loginData.password = getInputValue(password)
 
-        if(!onEmail(emailValue, email)) email.classList.add("warning")
-        else email.classList.remove("warning")
+    onEmail(loginData.email, email)
+    onText(loginData.password, password)
 
-        if(!onPassword(passValue, password, true)) password.classList.add("warning")
-        else password.classList.remove("warning")
+    if(onEmail(loginData.email, email) && onText(loginData.password, password)) {
 
-        if(onEmail(emailValue, email) && onPassword(passValue, password, true)) {
+        const {status, errorCode} = await login(loginData.email, loginData.password)
 
-            const {status, errorCode} = await login(emailValue, passValue)
+        if(!status && errorCode == authError["invalidCredential"]) {
+            password.classList.add("warning")
+            onError(password, "invalidCredential")
+        } else if(!status && errorCode == authError["userDisabled"]) {
+            email.classList.add("warning")
+            onError(email, "userDisabled")
+        } else {
+            closeBurgers()
+            allClose()
 
-            if(!status && errorCode == authError["invalidCredential"]) {
-                password.classList.add("warning")
-                onError(password, "invalidCredential")
-            } else if(!status && errorCode == authError["userDisabled"]) {
-                email.classList.add("warning")
-                onError(email, "userDisabled")
-            } else {
-                closeBurgers()
-                allClose()
+            email.querySelector("input").value = ""
+            password.querySelector("input").value = ""
 
-                email.querySelector("input").value = ""
-                password.querySelector("input").value = ""
-
-                usePlaceholder()
-            }
+            usePlaceholder()
         }
-    })
-}
+    }
+})
 
 lookInput(email.querySelector("input"))
 lookInput(password.querySelector("input"))
+
+function getInputValue(element) {
+    if(element) return element.querySelector("input").value
+}
 
 function lookInput(input) {
     if(input) {

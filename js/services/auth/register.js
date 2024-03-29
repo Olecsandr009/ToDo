@@ -1,17 +1,18 @@
 import {createUserWithEmailAndPassword, getAuth} from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js'
-import {doc, setDoc} from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js'
+import {doc, setDoc, collection} from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js'
 import { db } from '../../assets/firebaseConf.js'
 import { emailExists } from "./functions/emailExists.js"
 
-export async function register({data}) {
+export async function register(data) {
     try {
         const auth = getAuth()
 
         const result = await createUserWithEmailAndPassword(auth, data.email, data.password)
         const user = result.user
 
-        if(!await emailExists(user.email)) {  
-            setDoc(doc(db, "users", user.uid), {
+        if(!await emailExists(user.email)) {
+            const usersRef = collection(db, "users")
+            await setDoc(doc(usersRef, user.uid), {
                 email: data.email,
                 password: data.password,
                 name: data.name,

@@ -1,22 +1,23 @@
 import { authGoogle } from "../../services/auth/google.js"
 import { getUserGoogle } from "../profile/profile.js"
+import { allClose } from "../../utils/popup.js"
+import { closeBurgers } from "../../utils/burger.js"
 
 const google = document.querySelectorAll("[data-login-google]")
 
-if(google.length) {
-    google.forEach(element => {
-
-        element.addEventListener("click", e => {
+google.forEach(element => {
+    element.addEventListener("click", async e => {
+        try {
             e.preventDefault()
-            
-            try {
-                authGoogle()
-                getUserGoogle({
-                    popupClose: true
-                })
-            } catch(e) {
-                console.log(e)
-            }
-        })
+        
+            const result = await authGoogle()
+
+            if(result) allClose()
+            if(result) closeBurgers()
+
+            getUserGoogle()
+        } catch(error) {
+            console.log(error)
+        }
     })
-}
+})
