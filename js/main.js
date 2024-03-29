@@ -21,5 +21,3 @@ import "./modules/task/deleteTask.js"
 import "./modules/task/updateTask.js"
 
 import "./modules/profile/profile.js"
-
-import "./services/auth/login.js"

@@ -26,6 +26,7 @@ if(logoutBtn) {
 
         if(e.target.closest("[data-false]")) {
             status = false
+            
             allClose()
             closeBurgers()
         }

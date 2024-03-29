@@ -1,15 +1,15 @@
-import {getAuth, signOut} from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js'
+import {signOut} from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js'
+import { getUser } from './profile'
 
 export async function googleSingOut() {
     try {
-        const auth = getAuth()
+        const user = await getUser();
         
-        if(auth) {
-            await signOut(auth)
-        }
+        if(user) await signOut(auth)
 
         return true
-    } catch(e) {
-        console.log(e)
+    } catch(error) {
+        console.log(error.message)
+        return false
     }
 }

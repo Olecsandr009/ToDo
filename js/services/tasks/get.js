@@ -5,7 +5,7 @@ import { getUser } from "../auth/profile.js"
 export async function getTasks() {
     try {
         const user = await getUser()
-        let tasks = null
+        let tasks = undefined
 
         if(user) {
             const q = query(collection(db, "tasks"), where("userId", "==", user.uid.toString()))
@@ -13,7 +13,8 @@ export async function getTasks() {
         }
 
         return tasks
-    } catch(e) {
-        console.log(e)
+    } catch(error) {
+        console.log(error.message)
+        return undefined
     }
 }

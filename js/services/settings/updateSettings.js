@@ -1,5 +1,4 @@
-import { doc, updateDoc, query, where, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js"
-import { getUser, getUserData } from "../auth/profile.js"
+import { doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js"
 import { db } from "../../assets/firebaseConf.js"
 import { getSettings } from "./getSettings.js"
 
@@ -8,7 +7,6 @@ export async function updateSettings(data) {
         const settings = await getSettings()
 
         if(settings) {
-
             const taskRef = doc(db, "settings", settings.id)
             
             await updateDoc(taskRef, {

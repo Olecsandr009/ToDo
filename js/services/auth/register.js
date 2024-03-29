@@ -1,20 +1,21 @@
 import {createUserWithEmailAndPassword, getAuth} from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js'
-import {doc, setDoc,  query, collection, where, getDocs} from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js'
+import {doc, setDoc} from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js'
 import { db } from '../../assets/firebaseConf.js'
+import { emailExists } from "./functions/emailExists.js"
 
-export async function register(email, password, name, firstName) {
+export async function register({data}) {
     try {
         const auth = getAuth()
 
-        const result = await createUserWithEmailAndPassword(auth, email, password)
+        const result = await createUserWithEmailAndPassword(auth, data.email, data.password)
         const user = result.user
 
         if(!await emailExists(user.email)) {  
             setDoc(doc(db, "users", user.uid), {
-                email: email,
-                password: password,
-                name: name,
-                firstName: firstName,
+                email: data.email,
+                password: data.password,
+                name: data.name,
+                firstName: data.firstName,
                 created: new Date(),
                 telegramId: " ",
                 uid: user.uid,
@@ -27,18 +28,4 @@ export async function register(email, password, name, firstName) {
     } catch(error) {
         return {status: false, errorCode: error.code}
     }
-}
-
-async function emailExists(email) {
-    const q = query(collection(db, "users"), where("email", "==", email.toString()))
-
-    const users = []
-
-    const result = await getDocs(q)
-    result.forEach(doc => {
-        users.push(doc)
-    })
-
-    if(users.length) return true
-    else return false
 }
