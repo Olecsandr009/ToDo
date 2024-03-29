@@ -30,10 +30,8 @@ if(submit) submit.addEventListener("click", async e => {
 
     data = getDataInputs(data, elements)
 
-    const elementsArray = Object.values(elements)
-    const isValid = elementsArray.every(element => isValidValues(element))
-
-    if(isValid) {
+    if(isValidFunc(elements)) {
+        console.log("register")
 
         const {status, errorCode} = await register(data)
 
@@ -54,6 +52,15 @@ if(submit) submit.addEventListener("click", async e => {
 })
 
 for(const key in elements) lookDataInput(elements[key])
+
+function isValidFunc(elements) {
+    const elementsArray = Object.values(elements)
+    let isValidState = true;
+    for(let i = 0; i < elementsArray.length; i++) {
+        if(!isValidValues(elementsArray[i]) && isValidState) isValidState = false;
+    }
+    return isValidState
+}
 
 function getInput(element) {
     return element.querySelector("input")
@@ -90,7 +97,7 @@ function isValidValues(element) {
         case elements.email:
             return onEmail(data.email, element);
         case elements.password:
-            return onPassword(data.email, element);
+            return onPassword(data.password, element);
         case elements.repeat:
             return onRepeat(data.password, data.repeat, element)
         default:

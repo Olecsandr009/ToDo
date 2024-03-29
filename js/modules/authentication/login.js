@@ -23,12 +23,8 @@ if(submit) submit.addEventListener("click", async e => {
 
     data = getDataInputs(data, elements)
 
-    const elementsArray = Object.values(elements)
-    const isValid = elementsArray.every(element => isValidValues(element))
-
-    if(isValid) {
-
-        const {status, errorCode} = await login(loginData.email, loginData.password)
+    if(isValidFunc(elements)) {
+        const {status, errorCode} = await login(data.email, data.password)
 
         if(status && !errorCode) {
             closeBurgers()
@@ -49,6 +45,15 @@ if(submit) submit.addEventListener("click", async e => {
 })
 
 for(const key in elements) lookDataInput(elements[key])
+
+function isValidFunc(elements) {
+    const elementsArray = Object.values(elements)
+    let isValidState = true;
+    for(let i = 0; i < elementsArray.length; i++) {
+        if(!isValidValues(elementsArray[i]) && isValidState) isValidState = false;
+    }
+    return isValidState
+}
 
 function getInput(element) {
     return element.querySelector("input")
