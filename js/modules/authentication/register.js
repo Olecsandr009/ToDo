@@ -1,20 +1,23 @@
-import { register } from "../../services/auth/register.js"
-import { authError } from "../../assets/auth.js"
+import { onEmail, onError, onPassword, onRepeat, onText } from "../../utils/validate/validate.js"
+import { usePlaceholder } from "../../utils/placeholder.js"
 import { closeBurgers } from "../../utils/burger.js"
 import { allClose } from "../../utils/popup.js"
-import { usePlaceholder } from "../../utils/placeholder.js"
 
-import { onEmail, onPassword, onRepeat, onText } from "../../utils/validate/validate.js"
+import { register } from "../../services/auth/register.js"
+import { authError } from "../../assets/auth.js"
 
-const name = document.querySelector("[data-reg-name]")
-const firstName = document.querySelector("[data-reg-first]")
-const email = document.querySelector("[data-reg-email]")
-const password = document.querySelector("[data-reg-pass]")
-const repeat = document.querySelector("[data-reg-repeat]")
+
+const elements = {
+    name: document.querySelector("[data-reg-name]"),
+    firstName: document.querySelector("[data-reg-first]"),
+    email: document.querySelector("[data-reg-email]"),
+    password: document.querySelector("[data-reg-pass]"),
+    repeat: document.querySelector("[data-reg-repeat]")
+}
 
 const submit = document.querySelector("[data-reg-submit]")
 
-const data = {
+let data = {
     name: "",
     firstName: "",
     email: "",
@@ -22,62 +25,70 @@ const data = {
     repeat: ""
 }
 
-if(submit) {
-    submit.addEventListener("click", async e => {
-        e.preventDefault()
+if(submit) submit.addEventListener("click", async e => {
+    e.preventDefault()
 
-        if(name) data.name = name.querySelector("input").value
-        if(firstName) data.firstName = firstName.querySelector("input").value
-        if(email) data.email = email.querySelector("input").value
-        if(password) data.password = password.querySelector("input").value
-        if(repeat) data.repeat = repeat.querySelector("input").value
+    data = getDataInputs(data, elements)
 
-        onText(data.name, name)
-        onText(data.firstName, firstName)
-        onEmail(data.email, email)
-        onPassword(data.password, password)
-        onRepeat(data.password, data.repeat, repeat)
+    const elementsArray = Object.values(elements)
+    const isValid = elementsArray.every(element => isValidValues(element))
 
-        if(
-            onText(data.name, name) &&
-            onText(data.firstName, firstName) &&
-            onEmail(data.email, email) &&
-            onPassword(data.password, password) &&
-            onRepeat(data.password, data.repeat, repeat)
-        ) {
+    if(isValid) {
 
-            const {status, errorCode} = await register(data)
+        const {status, errorCode} = await register(data)
 
-            if(!status && errorCode == authError["emailAlready"]) {
-                email.classList.add("warning")
-                onError(email, "emailAlready")
-            } else if(status && !errorCode) {
-                closeBurgers()
-                allClose()
+        if(status && !errorCode) {
+            closeBurgers()
+            allClose()
 
-                name.querySelector("input").value = ""
-                firstName.querySelector('input').value = ""
-                email.querySelector("input").value = ""
-                password.querySelector("input").value = ""
-                repeat.querySelector("input").value = ""
+            for(const key in elements) clearDataInputs(elements[key])
 
-                usePlaceholder()
-            }
+            usePlaceholder()
+
+        } else if(!status && errorCode == authError["emailAlready"]) {
+            elements.email.classList.add("warning")
+            onError(elements.email, "emailAlready")
         }
- 
-    })
+    }
+
+})
+
+for(const key in elements) lookDataInput(elements[key])
+
+function getDataInputs(object, inputsData) {
+    const newObject = object;
+    for(key in inputsData) {
+        newObject[key] = inputsData[key] ? inputsData[key]:""
+    }
+
+    return newObject
 }
 
-lookInput(name.querySelector("input"))
-lookInput(firstName.querySelector("input"))
-lookInput(email.querySelector("input"))
-lookInput(password.querySelector("input"))
-lookInput(repeat.querySelector("input"))
-
-function lookInput(input) {
-    if(input) {
-        input.addEventListener("input", e => {
-            input.parentElement.classList.remove("warning")
-        })
+function isValidValues(element) {
+    switch(element) {
+        case elements.name:
+            return onText(data.name, element)
+        case elements.firstName:
+            return onText(data.firstName, element);
+        case elements.email:
+            return onEmail(data.email, element);
+        case elements.password:
+            return onPassword(data.email, element);
+        case elements.repeat:
+            return onRepeat(data.password, data.repeat, element)
+        default:
+            return false
     }
+}
+
+function clearDataInputs(element) {
+    if(element) element.querySelector("input").value = ""
+}
+
+function lookDataInput(element) {
+    if(!element) return
+    const input = element.querySelector("input")
+    if(input) input.addEventListener("input", e => {
+        element.classList.remove("warning")
+    })
 }
