@@ -31,7 +31,6 @@ if(submit) submit.addEventListener("click", async e => {
     data = getDataInputs(data, elements)
 
     if(isValidFunc(elements)) {
-        console.log("register")
 
         const {status, errorCode} = await register(data)
 

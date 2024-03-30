@@ -4,15 +4,15 @@ export function taskBlock(task, id) {
 
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
-    const deadline = new Date(task.deadline.seconds * 1000).toString().split(" ")
+    const timestamp = task.deadline.seconds * 1000
+    const deadline = new Date(timestamp).toString().split(" ")
 
-    const date = new Date()
     const year = deadline[3]
     const day = deadline[2]
 
     const validDeadline = day + ":" + (months.indexOf(deadline[1]) + 1) + ":" + year
 
-    const dayLength = calculateDays(new Date(task.deadline.seconds * 1000))
+    const dayLength = calculateDays(new Date(timestamp))
 
     return `
         <div data-task-item="${id}" class="content__block">

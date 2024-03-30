@@ -15,12 +15,14 @@ document.addEventListener("DOMContentLoaded", e => {
 export async function useProfile() {
     try {
         const user = await getUserData()
+        if(!user) return
 
-        if(user) {
-            authHandler(user)
-            selectThemeDefault()
-            getTask()
-        }
+        authHandler(user)
+
+        selectThemeDefault()
+        
+        getTask()
+
     } catch(error) {
         console.log(error.message)
     }

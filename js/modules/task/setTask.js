@@ -1,15 +1,18 @@
-import { setTask } from "../../services/tasks/create.js"
-import { getTask } from "./getTask/getTask.js"
-import { allClose } from "../../utils/popup.js"
+import { onDeadline, onTextArea, onTitle } from "../../utils/validate/validate.js"
 import { closeBurgers } from "../../utils/burger.js"
 import { openAlert } from "../../utils/alert.js"
+import { allClose } from "../../utils/popup.js"
+
+import { setTask } from "../../services/tasks/create.js"
+import { getTask } from "./getTask/getTask.js"
 import { alerts } from "../../assets/alerts.js"
 
-import { onDeadline, onTextArea, onTitle } from "../../utils/validate/validate.js"
 
-const title = document.querySelector("[data-task-title]")
-const desk = document.querySelector("[data-task-desk]")
-const date = document.querySelector("[data-date-input]")
+const elements = {
+    title: document.querySelector("[data-task-title"),
+    text: document.querySelector("[data-task-desk]"),
+    deadline: document.querySelector("[data-date-input]")
+}
 
 const send = document.querySelector("[data-task-send]")
 
@@ -22,57 +25,93 @@ const data = {
     userId: ""
 }
 
-if(send) {
-    send.addEventListener("click", async e => {
-        e.preventDefault()
+if(send) send.addEventListener("click", async e => {
+    e.preventDefault()
 
-        if(title) data.title = title.querySelector("input").value
-        if(desk) data.text = desk.querySelector("textarea").value
+    getDataInputs(data, elements)
 
-        const deadline = new Date(date.querySelector("input").value)
-        if(date) data.deadline = deadline
+    if(isValidFunc(elements)) {
+        data.created = new Date()
+        const status = await setTask(data)
 
-        onTitle(data.title, title)
-        onTextArea(data.text, desk)
-        onDeadline(data.deadline, date)
-
-        if(onTitle(data.title, title) && 
-           onTextArea(data.text, desk) && 
-           onDeadline(data.deadline, date)) {
-            data.created = new Date()
-            const status = await setTask(data)
-            
-            if(status) {
-                title.querySelector("input").value = ""
-                desk.querySelector("textarea").value = ""
-                date.querySelector("input").value = ""
-
-                closeBurgers()
-                allClose()
-                getTask()
-            } else {
-                closeBurgers()
-                allClose()
-                openAlert(alerts["error"])
-            }
+        closeBurgers()
+        allClose()
+        
+        if(status) {
+            clearDataInputs(elements)
+            getTask()
+        } else {
+            openAlert(alerts["error"])
         }
+    }
+})
+
+for(const key in elements) lookDataInput(elements[key])
+
+function isValidFunc(elements) {
+    const elementsArray = Object.values(elements)
+    let isValidState = true;
+    for(let i = 0; i < elementsArray.length; i++) {
+        if(!isValidValues(elementsArray[i]) && isValidState) isValidState = false;
+    }
+    return isValidState
+}
+
+
+function getDataInputs(object, elements) {
+    const newObject = object
+    for(const key in elements) {
+
+        if(key == "deadline") {
+            newObject[key] = new Date(getInput(elements[key]).value)
+            continue
+        }
+
+        const currentInput = getInput(elements[key])
+        newObject[key] = elements[key] ? currentInput.value : ""
+
+    }
+}
+
+function getInput(element) {
+    let currentElement = element.querySelector("input")
+
+    if(!currentElement)
+        currentElement = element.querySelector("textarea")
+
+    return currentElement
+}
+
+function lookDataInput(element) {
+    if(!element) return
+    const currentInput = getInput(element)
+    if(currentInput) currentInput.addEventListener("input", e => {
+        element.classList.remove("warning")
     })
 }
 
-lookInput(title.querySelector("input"))
-lookInput(desk.querySelector("textarea"))
+function clearDataInputs(elements) {
+    for(const key in elements) {
+        getInput(elements[key]).value = ""
+    }
+}
 
-function lookInput(input) {
-    if(input) {
-        input.addEventListener("input", e => {
-            input.parentElement.classList.remove("warning")
-        })
+function isValidValues(element) {
+    switch(element) {
+        case elements.title:
+            return onTitle(data.title, element);
+        case elements.text:
+            return onTextArea(data.text, element);
+        case elements.deadline:
+            return onDeadline(data.deadline, element);
+        default:
+            return
     }
 }
 
 export function checkDateInput() {
-    const dateInput = new Date(date.querySelector("input").value)
-    if(date.deadline != dateInput) {
-        date.classList.remove("warning")
+    const dateInput = new Date(elements.deadline.querySelector("input").value)
+    if(data.deadline != dateInput) {
+        elements.deadline.classList.remove("warning")
     }
 }
