@@ -14,7 +14,8 @@ export async function getSettings() {
 
             if(settingsArray) {
                 settingsArray.forEach(element => {
-                    settings = {setting: element.data(), id: element.id}
+                    settings = {...element.data(), id: element.id}
+                    console.log(settings)
                 })
             }
         }

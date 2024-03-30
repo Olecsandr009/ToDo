@@ -5,6 +5,7 @@ import { allClose } from "../../utils/popup.js"
 
 import { login } from "../../services/auth/login.js"
 import { authError } from "../../assets/auth.js"
+import { useProfile } from "../profile/profile.js"
 
 const elements = {
     email: document.querySelector("[data-login-email]"),
@@ -33,6 +34,7 @@ if(submit) submit.addEventListener("click", async e => {
             clearDataInputs(elements)
 
             usePlaceholder()
+            useProfile()
 
         } else if(!status && errorCode == authError["invalidCredential"]) {
             elements.password.classList.add("warning")

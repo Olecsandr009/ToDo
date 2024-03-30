@@ -1,5 +1,5 @@
 import { authGoogle } from "../../services/auth/google.js"
-import { getUserGoogle } from "../profile/profile.js"
+import { useProfile } from "../profile/profile.js"
 import { allClose } from "../../utils/popup.js"
 import { closeBurgers } from "../../utils/burger.js"
 
@@ -15,7 +15,7 @@ google.forEach(element => {
             if(result) allClose()
             if(result) closeBurgers()
 
-            getUserGoogle()
+            useProfile()
         } catch(error) {
             console.log(error)
         }

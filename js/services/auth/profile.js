@@ -19,8 +19,8 @@ export async function getUserData() {
         if(user) {
             const docRef = doc(db, "users", user.uid)
             const userData = await getDoc(docRef)
-            console.log(userData, "user Data result")
-            if(userData) return userData
+
+            if(userData.exists()) return userData.data()
         }
         
         return undefined

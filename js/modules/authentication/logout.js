@@ -3,7 +3,7 @@ import { popups } from "../../assets/popups.js"
 import { googleSingOut } from "../../services/auth/logout.js"
 import { openAlert } from "../../utils/alert.js"
 import { allClose, openPopup } from "../../utils/popup.js"
-import { getUserGoogle } from "../profile/profile.js"
+import { useProfile } from "../profile/profile.js"
 import { closeBurgers } from "../../utils/burger.js"
 
 const logout = document.querySelector("[data-logout]")
@@ -34,7 +34,7 @@ if(logoutBtn) logoutBtn.addEventListener('click', async e => {
             closeBurgers()
 
             openAlert(alerts["logout"])
-            getUserGoogle()
+            useProfile()
         }
 
     } catch(error) {
