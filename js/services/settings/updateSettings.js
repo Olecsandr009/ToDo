@@ -5,14 +5,11 @@ import { getSettings } from "./getSettings.js"
 export async function updateSettings(data) {
     try {
         const settings = await getSettings()
+        if(!settings) return
 
-        if(settings) {
-            const taskRef = doc(db, "settings", settings.id)
-            
-            await updateDoc(taskRef, {
-                ...data
-            })
-        }
+        const taskRef = doc(db, "settings", settings.id)
+        
+        await updateDoc(taskRef, {...data})
 
         return true
     } catch(error) {
