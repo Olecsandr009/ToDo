@@ -14,7 +14,7 @@
     <div class="wrapper">
         <!-- <header class="header"></header> -->
         <main class="main">
-            <aside data-burger="1" data-primary class="aside active">
+            <aside tabindex="-1" data-burger="1" data-primary class="aside active">
                 <div class="aside__user">
                     <button data-no-auth data-popup-link="2" class="aside__user-btn no-auth">
                         <svg style="width: 24px; height: 24px;">
@@ -75,7 +75,7 @@
                 </div>
 
             </aside>
-            <div data-burger="3" class="popup-logout">
+            <div tabindex="-1" data-burger="3" class="popup-logout">
                 <div data-shadow class="popup-shadow"></div>
                 <div class="logout">
                     <button data-close class="logout__close">&#x2716;</button>
@@ -103,8 +103,8 @@
 
     <div data-popup="1" class="popup-settings">
         <div data-shadow class="popup-shadow"></div>
-        <div class="popup-settings__modal">
-            <button data-close class="popup-settings__close">&#x2716;</button>
+        <div tabindex="-1" class="popup-settings__modal">
+            <button tabindex="-1" data-close class="popup-settings__close">&#x2716;</button>
 
             <aside class="popup-settings__aside">
                 <h2 class="popup-settings__title">
@@ -115,7 +115,7 @@
                 </h2>
                 <ul data-tab-list class="popup-settings__list">
                     <li data-tab-link="1" class="popup-settings__item active">
-                        <button class="popup-settings__button">Теми</button>
+                        <button tabindex="-1" class="popup-settings__button">Теми</button>
                     </li>
                 </ul>
             </aside>
@@ -126,7 +126,7 @@
                     <h3 class="theme__point-title">Виберіть тему</h3>
                     <ul data-theme class="theme__list">
                         <li class="theme__item">
-                            <button class="theme__btn" style="background-color: red;"></button>
+                            <button tabindex="-1" class="theme__btn" style="background-color: red;"></button>
                         </li>
                     </ul>
 
@@ -141,117 +141,117 @@
     <div data-popup="2" class="popup-auth">
         <div data-shadow class="popup-shadow"></div>
         <div class="popup-auth__modal">
-            <button data-close class="popup-auth__close">&#x2716;</button>
+            <button data-close tabindex="-1" class="popup-auth__close">&#x2716;</button>
 
             <h3 class="popup-auth__title">Авторизація</h3>
 
             <form class="popup-auth__form" action="#">
                 <label data-login-email class="popup-auth__label input">
-                    <input class="popup-auth__input" autocomplete="off" type="email"/>
+                    <input tabindex="-1" class="popup-auth__input" autocomplete="off" type="email"/>
                     <h4 data-placeholder class="popup-auth__placeholder placeholder">Email</h4>
                     <p data-warning class="popup-auth__warning"></p>
                 </label>
                 <label data-login-pass class="popup-auth__label input">
                     <div data-eye class="popup-auth__eye">
-                        <button data-eye-open class="popup-auth__eye-open active">
+                        <button tabindex="-1" data-eye-open class="popup-auth__eye-open active">
                             <svg style="width: 24px; height: 24px;">
                                 <use xlink:href="./images/eye.svg#eye"></use>
                             </svg>
                         </button>
-                        <button data-eye-close class="popup-auth__eye-close">
+                        <button tabindex="-1" data-eye-close class="popup-auth__eye-close">
                             <svg style="width: 24px; height: 24px;">
                                 <use xlink:href="./images/eye-close.svg#eye-close"></use>
                             </svg>
                         </button>
                     </div>
-                    <input data-input-pass class="popup-auth__input" autocomplete="off" type="password"/>
+                    <input tabindex="-1" data-input-pass class="popup-auth__input" autocomplete="off" type="password"/>
                     <h4 data-placeholder class="popup-auth__placeholder placeholder">Пароль</h4>
                     <p data-warning class="popup-auth__warning"></p>
                 </label>
 
-                <button data-login-google class="popup-auth__google google">
+                <button tabindex="-1" data-login-google class="popup-auth__google google">
                     <img src="./images/google.png" alt="google" />
                     <span>Увійти за допомогою google</span>
                 </button>
 
-                <button data-login-submit class="popup-auth__submit send">Авторизуватися</button>
+                <button tabindex="-1" data-login-submit class="popup-auth__submit send">Авторизуватися</button>
             </form>
                 
 
 
-            <button data-popup-link="3" class="popup-auth__bottom-btn">Зареєструватися</button>
+            <button tabindex="-1" data-popup-link="3" class="popup-auth__bottom-btn">Зареєструватися</button>
         </div>
     </div>
     <div data-popup="3" class="popup-auth register">
         <div data-shadow class="popup-shadow"></div>
         <div class="popup-auth__modal">
-            <button data-close class="popup-auth__close">&#x2716;</button>
+            <button tabindex="-1" data-close class="popup-auth__close">&#x2716;</button>
 
             <h3 class="popup-auth__title">Реєстрація</h3>
 
             <form class="popup-auth__form">
                 <label data-reg-name class="popup-auth__label input">
-                    <input class="popup-auth__input" autocomplete="off">
+                    <input tabindex="-1" class="popup-auth__input" autocomplete="off">
                     <p data-warning class="popup-auth__warning"></p>
                     <h4 data-placeholder class="popup-auth__placeholder placeholder">Ім'я</h4>
                 </label>
                 <label data-reg-first class="popup-auth__label input">
-                    <input class="popup-auth__input" autocomplete="off">
+                    <input tabindex="-1" class="popup-auth__input" autocomplete="off">
                     <h4 data-placeholder class="popup-auth__placeholder placeholder">Призвіще</h4>
                     <p data-warning class="popup-auth__warning"></p>
                 </label>
                 <label data-reg-email class="popup-auth__label input">
-                    <input class="popup-auth__input" autocomplete="off" type="email">
+                    <input tabindex="-1" class="popup-auth__input" autocomplete="off" type="email">
                     <h4 data-placeholder class="popup-auth__placeholder placeholder">Email</h4>
                     <p data-warning class="popup-auth__warning"></p>
                 </label>
                 <label data-reg-pass class="popup-auth__label input">
                     <div data-eye class="popup-auth__eye">
-                        <button data-eye-open class="popup-auth__eye-open active">
+                        <button tabindex="-1" data-eye-open class="popup-auth__eye-open active">
                             <svg style="width: 24px; height: 24px;">
                                 <use xlink:href="./images/eye.svg#eye"></use>
                             </svg>
                         </button>
-                        <button data-eye-close class="popup-auth__eye-close">
+                        <button tabindex="-1" data-eye-close class="popup-auth__eye-close">
                             <svg style="width: 24px; height: 24px;">
                                 <use xlink:href="./images/eye-close.svg#eye-close"></use>
                             </svg>
                         </button>
                     </div>
-                    <input class="popup-auth__input" autocomplete="off" type="password">
+                    <input tabindex="-1" class="popup-auth__input" autocomplete="off" type="password">
                     <h4 data-placeholder class="popup-auth__placeholder placeholder">Пароль</h4>
                     <p data-warning class="popup-auth__warning"></p>
                 </label>
                 <label data-reg-repeat class="popup-auth__label input">
                     <div data-eye class="popup-auth__eye">
-                        <button data-eye-open class="popup-auth__eye-open active">
+                        <button tabindex="-1" data-eye-open class="popup-auth__eye-open active">
                             <svg style="width: 24px; height: 24px;">
                                 <use xlink:href="./images/eye.svg#eye"></use>
                             </svg>
                         </button>
-                        <button data-eye-close class="popup-auth__eye-close">
+                        <button tabindex="-1" data-eye-close class="popup-auth__eye-close">
                             <svg style="width: 24px; height: 24px;">
                                 <use xlink:href="./images/eye-close.svg#eye-close"></use>
                             </svg>
                         </button>
                     </div>
-                    <input class="popup-auth__input" autocomplete="off" type="password">
+                    <input tabindex="-1" class="popup-auth__input" autocomplete="off" type="password">
                     <h4 data-placeholder class="popup-auth__placeholder placeholder">Повторіть пароль</h4>
                     <p data-warning class="popup-auth__warning"></p>
                 </label>
-                <button data-login-google class="popup-auth__google google">
+                <button tabindex="-1" data-login-google class="popup-auth__google google">
                     <img src="./images/google.png" alt="google" />
                     <span>Увійти за допомогою google</span>
                 </button>
-                <button data-reg-submit class="popup-auth__submit send">Зареєструватися</button>
+                <button tabindex="-1" data-reg-submit class="popup-auth__submit send">Зареєструватися</button>
             </form>
 
-            <button data-popup-link="2" class="popup-auth__bottom-btn">Я вже зареєстрований</button>
+            <button tabindex="-1" data-popup-link="2" class="popup-auth__bottom-btn">Я вже зареєстрований</button>
         </div>
     </div>
     <div data-burger="2" class="popup-date">
         <div data-shadow class="popup-shadow"></div>
-        <div data-calendar class="aside__calendar">
+        <div tabindex="-1" data-calendar class="aside__calendar">
             <h3 class="aside__calendar-title">Календар</h3>
             <button data-close class="aside__calendar-close">&#x2716;</button>
             <div class="aside__calendar-header">
@@ -280,7 +280,7 @@
 
     <div data-popup="6" class="popup-delete">
         <div data-shadow class="popup-shadow"></div>
-        <div class="popup-delete__modal">
+        <div tabindex="-1" class="popup-delete__modal">
             <button data-close class="popup-delete__close">&#x2716;</button>
             <h3 class="popup-delete__title">Ви дійсно хочете видалити це завдання?</h3>
             <div data-delete class="popup-delete__buttons">
@@ -292,7 +292,7 @@
 
     <div data-popup="7" class="popup-delete">
         <div data-shadow class="popup-shadow"></div>
-        <div class="popup-delete__modal">
+        <div tabindex="-1" class="popup-delete__modal">
             <button data-close class="popup-delete__close">&#x2716;</button>
             <h3 class="popup-delete__title">Ви дійсно хочете вийти з акаунта?</h3>
             <div data-logout-buttons class="popup-delete__buttons">
@@ -302,7 +302,7 @@
         </div>
     </div>
 
-    <div data-alert="1" data-timer class="alert">
+    <div tabindex="-1" data-alert="1" data-timer class="alert">
         <h3 class="alert__modal-title">
             <svg style="width: 24px; height: 24px;">
                 <use xlink:href="./images/complete.svg#complete"></use>
@@ -310,7 +310,7 @@
             <span>Завдання виконано!</span>
         </h3>
     </div>
-    <div data-alert="2" data-timer class="alert">
+    <div tabindex="-1" data-alert="2" data-timer class="alert">
         <h3 class="alert__modal-title delete">
             <svg style="width: 24px; height: 24px;">
                 <use xlink:href="./images/trash.svg#trash"></use>
@@ -318,12 +318,12 @@
             <span>Завдання видалено!</span>
         </h3>
     </div>
-    <div data-alert="3" data-timer class="alert">
+    <div tabindex="-1" data-alert="3" data-timer class="alert">
         <h3 class="alert__modal-title">
             <span>Ви успішно вийшли з акаунта!</span>
         </h3>
     </div>
-    <div data-alert="4" data-timer class="alert">
+    <div tabindex="-1" data-alert="4" data-timer class="alert">
         <h3 class="alert__modal-title delete">
             <span>Упс невідома помилка!</span>
         </h3>
