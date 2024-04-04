@@ -21,11 +21,3 @@ import "./modules/task/deleteTask.js"
 import "./modules/task/updateTask.js"
 
 import "./modules/profile/profile.js"
-
-
-document.addEventListener("focus", e => {
-    console.log("focus")
-    const focusElement = e.target
-
-    console.log(focusElement)
-}, true)

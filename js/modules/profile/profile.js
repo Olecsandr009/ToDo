@@ -1,5 +1,5 @@
 import { getUserData } from '../../services/auth/profile.js'
-import { selectThemeDefault } from '../settings/theme/theme.js'
+import { selectThemeDefault } from '../settings/theme/functions/selectTheme.js'
 import { getTask } from "../task/getTask/getTask.js"
 
 const noAuth = document.querySelector("[data-no-auth]")
@@ -15,19 +15,16 @@ document.addEventListener("DOMContentLoaded", e => {
 export async function useProfile() {
     try {
         const user = await getUserData()
-        if(!user) return
-
         authHandler(user)
-
+        
         selectThemeDefault()
         
-        getTask()
+        if(user) getTask()        
 
     } catch(error) {
         console.log(error.message)
     }
 }
-
 
 function authHandler(user) {
      if(user) {

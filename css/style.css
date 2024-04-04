@@ -409,6 +409,7 @@ body {
     border: 2px solid var(--color-text);
     border-radius: 8px;
     padding: 11px 10px;
+    cursor: pointer;
 }
 .aside__button-date svg {
     fill: var(--color-secondary);
